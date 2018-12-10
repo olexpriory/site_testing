@@ -2,6 +2,8 @@
         session_start();
        require ('conection_db.php');
 
+       // fgdhjf
+
        if(isset($_POST['user_surname']) && isset($_POST['user_name']) ){
 
         $usersurname    = $_POST['user_surname'];
