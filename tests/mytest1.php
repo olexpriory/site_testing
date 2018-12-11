@@ -342,11 +342,18 @@
 
 
     <!-- end -->
-
+    <!-- - -->
+    <!-- - -->
+    <!-- - -->
+    <!-- - -->
+    <!-- - -->
 
     <div id="ext-comp-1014" class=" x-panel x-border-panel x-panel-noborder" style="left: 195px; top: 0px; width: 500px;">
+
         <div class="x-panel-bwrap" id="ext-gen49">
-            <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen50" style="overflow: auto; width: 500px; height: 545px;">
+
+            <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen50" style="overflow: auto; width: 500px; height: 3 45px;">
+
                 <div id="quiz-title-ext-gen26" class=" x-panel quiz-item-container-panel x-panel-noborder x-hide-display" style="margin: 10px 30px 10px 10px; padding: 0px; width: auto;">
                     <div class="x-panel-bwrap" id="ext-gen57">
                         <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen58" style="padding: 0px; width: auto; height: auto;">
@@ -359,76 +366,95 @@
                         </div>
                     </div>
                 </div>
+                
 
+                <!--need -->
                 <div id="ext-comp-1019" class=" x-panel master-quiz-panel x-panel-noborder ">
+
                     <div class="x-panel-bwrap" id="ext-gen61">
+
                         <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen62" style="height: auto;">
+
                             <div id="quiz-item-1-ext-gen33" class=" x-panel quiz-item-container-panel x-panel-noborder" style="margin-right: 20px; width: auto;">
+
                                 <div class="x-panel-bwrap" id="ext-gen90">
+
                                     <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen91" style="width: auto; height: auto; visibility: visible;">
+
                                         <div id="ext-comp-1023" class=" x-plain master-question-panel quiz-item-panel x-plain-noborder" style="width: auto;">
-                                            
+                                                
                                             <h3 class="master-question-title x-plain-header-noborder x-unselectable" id="ext-gen92">
                                                 <span class="question-number" id="ext-gen96"> </span>
                                                 Питання1
                                             </h3>
 
-                                                <div class="x-plain-bwrap" id="ext-gen93">
-                                                    <div class="x-plain-body x-plain-body-noborder" id="ext-gen94" style="width: auto; height: auto;">
-                                                        <div id="ext-comp-1024" class=" x-panel x-panel-noborder">
-                                                            <div class="x-panel-bwrap" id="ext-gen97">
-                                                                <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen98" style="height: auto;">
-                                                                </div>
+                                            <div class="x-plain-bwrap" id="ext-gen93">
+
+                                                <div class="x-plain-body x-plain-body-noborder" id="ext-gen94" style="width: auto; height: auto;">
+
+                                                    <div id="ext-comp-1024" class=" x-panel x-panel-noborder">
+
+                                                        <div class="x-panel-bwrap" id="ext-gen97">
+                                                            <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen98" style="height: auto;">
                                                             </div>
                                                         </div>
 
-                                                        <div id="ext-comp-1025" class=" x-panel x-panel-noborder">
-                                                            <div class="x-panel-bwrap" id="ext-gen99">
-                                                                <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen100" style="height: auto;">
-                                                                </div>
+                                                    </div>
+
+                                                    <div id="ext-comp-1025" class=" x-panel x-panel-noborder">
+                                                        <div class="x-panel-bwrap" id="ext-gen99">
+                                                            <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen100" style="height: auto;">
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div id="ext-comp-1026" class=" x-panel x-panel-noborder">
-                                                            <div class="x-panel-bwrap" id="ext-gen101">
-                                                                <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen102" style="height: auto;">
-                                                                    <div id="ext-comp-1027" class=" x-panel x-panel-noborder" style="width: auto;">
-                                                                        <div class="x-panel-bwrap"  id="ext-gen103">
-                                                                            <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen104" style="width: auto; height: auto;">
-                                                                                <div class="x-form-item  x-hide-label" tabindex="-1">
+                                                    <div id="ext-comp-1026" class=" x-panel x-panel-noborder">
 
-                                                                                    <label for="ext-comp-1057" style="width:100px;"class="x-form-item-label">
-                                                                                    </label>
+                                                        <div class="x-panel-bwrap" id="ext-gen101">
 
-                                                                                    <div class="x-form-element" id="x-form-el-ext-comp-1057" style="padding-left:105px">
-                                                                                        <div class="x-form-check-wrap" id="ext-gen105" style="height: auto;">
+                                                            <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen102" style="height: auto;">
 
-                                                                                            <input type="radio" autocomplete="off" id="ext-comp-1057" name="question_answer_1" class=" x-form-radio x-form-field" value="1">
-                                                                                                                                
-                                                                                            <label  for="ext-comp-1057" class="x-form-cb-label" id="ext-gen106">Відповіть1</label>
-                                                                                        </div>
-                                                                                    </div>
+                                                                <div id="ext-comp-1027" class=" x-panel x-panel-noborder" style="width: auto;">
 
+                                                                    <div class="x-panel-bwrap"  id="ext-gen103">
 
-                                                                                    <div class="x-form-clear-left">                      
+                                                                        <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen104" style="width: auto; height: auto;">
+
+                                                                            <div class="x-form-item  x-hide-label" tabindex="-1">
+
+                                                                                <label for="ext-comp-1057" style="width:100px;"class="x-form-item-label"></label>
+
+                                                                                <div class="x-form-element" id="x-form-el-ext-comp-1057" style="padding-left:105px">
+
+                                                                                    <div class="x-form-check-wrap" id="ext-gen105" style="height: auto;">
+
+                                                                                        <input type="radio" autocomplete="off" id="ext-comp-1057" name="question_answer_1" class=" x-form-radio x-form-field" value="1">                                                             
+                                                                                        <label  for="ext-comp-1057" class="x-form-cb-label" id="ext-gen106">Відповіть1</label>
+
                                                                                     </div>
 
                                                                                 </div>
+
+                                                                                <div class="x-form-clear-left"></div>
+
+                                                                            </div>
+
                                                                             <div class="x-form-item  x-hide-label" tabindex="-1">
 
                                                                                 <label for="ext-comp-1058" style="width:100px;" class="x-form-item-label"></label>
 
                                                                                 <div class="x-form-element" id="x-form-el-ext-comp-1058" style="padding-left:105px">
+
                                                                                     <div class="x-form-check-wrap" id="ext-gen107" style="height: auto;">
-                                                                                    
+                                                                                        
                                                                                         <input type="radio" autocomplete="off"  id="ext-comp-1058" name="question_answer_1" class=" x-form-radio x-form-field" value="2">
                                                                                         <label  for="ext-comp-1058" class="x-form-cb-label" id="ext-gen108">Відповіть2</label>
 
                                                                                     </div>
+
                                                                                 </div>
 
-                                                                                <div class="x-form-clear-left"> 
-                                                                                </div>
+                                                                                <div class="x-form-clear-left"> </div>
 
                                                                             </div>
 
@@ -437,231 +463,481 @@
                                                                                 <label for="ext-comp-1059" style="width:100px;" class="x-form-item-label"></label>
 
                                                                                 <div class="x-form-element"  id="x-form-el-ext-comp-1059"  style="padding-left:105px">
+
                                                                                     <div class="x-form-check-wrap" id="ext-gen109"  style="height: auto;">
 
-                                                                                        <input type="radio" autocomplete="off" id="ext-comp-1059" name="question_answer_1" class=" x-form-radio x-form-field" value="3">
-                                                                                        <label for="ext-comp-1059" class="x-form-cb-label" id="ext-gen110">Відповіть3</label>
-                                                                                        
+                                                                                            <input type="radio" autocomplete="off" id="ext-comp-1059" name="question_answer_1" class=" x-form-radio x-form-field" value="3">
+                                                                                            <label for="ext-comp-1059" class="x-form-cb-label" id="ext-gen110">Відповіть3</label>
+                                                                                            
                                                                                     </div>
+
                                                                                 </div> 
 
                                                                                 <div class="x-form-clear-left"></div>
 
                                                                             </div>
 
-                                                                        <div class="x-form-item  x-hide-label"  tabindex="-1">
+                                                                            <div class="x-form-item  x-hide-label"  tabindex="-1">
 
-                                                                            <label for="ext-comp-1060"  style="width:100px;" class="x-form-item-label"></label>
+                                                                                <label for="ext-comp-1060"  style="width:100px;" class="x-form-item-label"></label>
 
-                                                                            <div class="x-form-element" id="x-form-el-ext-comp-1060" style="padding-left:105px">
-                                                                                <div class="x-form-check-wrap" id="ext-gen111" style="height: auto;">
-                                                                                    
-                                                                                    <input type="radio" autocomplete="off" id="ext-comp-1060" name="question_answer_1" class=" x-form-radio x-form-field" value="4">
-                                                                                    <label for="ext-comp-1060" class="x-form-cb-label" id="ext-gen112">Відповіть4</label>
+                                                                                <div class="x-form-element" id="x-form-el-ext-comp-1060" style="padding-left:105px">
+                                                                                    <div class="x-form-check-wrap" id="ext-gen111" style="height: auto;">
+                                                                                        
+                                                                                        <input type="radio" autocomplete="off" id="ext-comp-1060" name="question_answer_1" class=" x-form-radio x-form-field" value="4">
+                                                                                        <label for="ext-comp-1060" class="x-form-cb-label" id="ext-gen112">Відповіть4</label>
 
-                                                                                </div>
+                                                                                    </div>
+                                                                                </div> 
+
+                                                                                <div class="x-form-clear-left"></div>
+
                                                                             </div> 
 
-                                                                            <div class="x-form-clear-left"></div>
+                                                                            <div class="x-form-item  x-hide-label" tabindex="-1">
 
-                                                                        </div> 
+                                                                                <label for="ext-comp-1061" style="width:100px;"  class="x-form-item-label"></label>
 
-                                                                        <div class="x-form-item  x-hide-label" tabindex="-1">
+                                                                                <div class="x-form-element" id="x-form-el-ext-comp-1061" style="padding-left:105px">
 
-                                                                            <label for="ext-comp-1061" style="width:100px;"  class="x-form-item-label"></label>
+                                                                                    <div class="x-form-check-wrap" id="ext-gen113" style="height: auto;">
+                                                                                    
+                                                                                        <input type="radio" autocomplete="off" id="ext-comp-1061" name="question_answer_1" class=" x-form-radio x-form-field" value="5">
+                                                                                        <label for="ext-comp-1061" class="x-form-cb-label" id="ext-gen114">Відповіть5</label>
 
-                                                                            <div class="x-form-element" id="x-form-el-ext-comp-1061" style="padding-left:105px">
-                                                                                <div class="x-form-check-wrap" id="ext-gen113" style="height: auto;">
-                                                                                
-                                                                                    <input type="radio" autocomplete="off" id="ext-comp-1061" name="question_answer_1" class=" x-form-radio x-form-field" value="5">
-                                                                                    <label for="ext-comp-1061" class="x-form-cb-label" id="ext-gen114">Відповіть5</label>
+                                                                                    </div>
+
                                                                                 </div>
+
+                                                                                <div class="x-form-clear-left"></div>
+
                                                                             </div>
 
-                                                                            <div class="x-form-clear-left"></div>
+                                                                        </div>
 
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--need -->
+
+
+            </div>
+
+
+            <div class="MYCLASS" id="ididiidid" style="background: red; width: 100; height: 100px;"> </div>
+
+            
+            <!-- good  -->
+            <div class="x-panel-bbar x-panel-bbar-noborder" id="ext-gen51" style="background: blue; width: 500px;">
+                <div id="ext-comp-1013" class="x-toolbar x-small-editor x-toolbar-layout-ct" style="height: 31px; width: 496px;">
+                    <table cellspacing="0" class="x-toolbar-ct">
+
+                        <tbody>
+
+                            <tr>
+
+                                <td class="x-toolbar-left" align="left">
+                                    <table cellspacing="0">
+                                        <tbody>
+
+                                            <tr class="x-toolbar-left-row">
+                                                
+                                                <td class="x-toolbar-cell" id="ext-gen63">
+
+                                                    <table cellspacing="0" class="x-btn  x-btn-text-icon " id="ext-comp-1016" style="height: 30px; width: auto;">
+
+                                                        <tbody class="x-btn-small x-btn-icon-small-left">
+
+                                                            <tr>
+                                                                <td class="x-btn-tl"><i>&nbsp;</i></td>
+                                                                <td class="x-btn-tc"></td>
+                                                                <td class="x-btn-tr"><i>&nbsp;</i></td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="x-btn-ml"><i>&nbsp;</i></td>
+                                                                <td class="x-btn-mc"> 
+                                                                    <em class="" unselectable="on"> 
+                                                                        <button  class="x-btn-text icon-arrow_left" type="button" id="ext-gen65">Предыдущее</button>
+                                                                    </em>   
+                                                                </td>
+                                                        
+                                                                <td class="x-btn-mr"><i>&nbsp;</i></td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="x-btn-bl"><i>&nbsp;</i></td>
+                                                                <td class="x-btn-bc"></td>
+                                                                <td class="x-btn-br"><i>&nbsp;</i></td>
+                                                            </tr>
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </td>
+
+                                                <td class="x-toolbar-cell" id="ext-gen66">
+                                                    <span  class="xtb-sep" id="ext-gen67"></span>
+                                                </td>
+
+                                                <td class="x-toolbar-cell" id="ext-gen68">
+
+                                                    <table cellspacing="0" class="x-btn  x-btn-text-icon" id="ext-comp-1015" style="height: 30px; width: auto;">
+
+                                                        <tbody class="x-btn-small x-btn-icon-small-right">
+
+                                                            <tr>
+                                                                <td class="x-btn-tl"><i>&nbsp;</i></td>
+                                                                <td class="x-btn-tc"></td>
+                                                                <td class="x-btn-tr"><i>&nbsp;</i></td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="x-btn-ml"><i>&nbsp;</i></td>
+
+                                                                <td class="x-btn-mc">
+                                                                    <em class="" unselectable="on">
+                                                                        <button class="x-btn-text icon-arrow_right" type="button"  id="ext-gen70">Далее</button>
+                                                                    </em>
+                                                                </td>
+
+                                                                <td class="x-btn-mr"><i>&nbsp;</i></td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="x-btn-bl"><i>&nbsp;</i></td>
+                                                                <td class="x-btn-bc"></td>
+                                                                <td class="x-btn-br"><i>&nbsp;</i></td>
+                                                            </tr>
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </td>
+
+                                <td class="x-toolbar-right" align="right">
+
+                                    <table cellspacing="0" class="x-toolbar-right-ct">
+
+                                        <tbody>
+
+                                            <tr>
+
+                                                <td>
+
+                                                    <table cellspacing="0">
+
+                                                        <tbody>
+
+                                                            <tr class="x-toolbar-right-row">
+
+                                                                <td class="x-toolbar-cell x-hide-display"  id="ext-gen71">
+
+                                                                    <div id="quiz-timer-ext-gen24"  class=" x-panel"  style="width: 50px;">
+                                                                        <div class="x-panel-bwrap"id="ext-gen72">
+                                                                            <div  class="x-panel-body x-panel-body-noheader"  id="ext-gen73" style="width: 48px; height: 18px;"></div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                                                                </td>
+
+                                                                <td class="x-toolbar-cell" id="ext-gen74">
+                                                                    <span  class="xtb-sep" id="ext-gen75"></span>
+                                                                </td>
+
+                                                                <td class="x-toolbar-cell" id="ext-gen76">
+
+                                                                    <table cellspacing="0"  class="x-btn  x-btn-text-icon" id="ext-comp-1008" style="height: 30px; width: auto;">
+
+                                                                        <tbody class="x-btn-small x-btn-icon-small-left">
+
+                                                                            <tr>
+                                                                                <td class="x-btn-tl"><i>&nbsp;</i></td>
+                                                                                <td class="x-btn-tc"></td>
+                                                                                <td class="x-btn-tr"><i>&nbsp;</i></td>
+                                                                            </tr>
+
+                                                                            <tr>
+
+                                                                                <td class="x-btn-ml"><i>&nbsp;</i></td>
+
+                                                                                <td class="x-btn-mc">
+                                                                                    <em class="" unselectable="on">
+                                                                                        <button  class="x-btn-text icon-tick"  type="button"  id="ext-gen78" name="finish_button">Закончить</button>
+                                                                                    </em>
+                                                                                </td>
+
+                                                                                <td class="x-btn-mr"><i>&nbsp;</i></td>
+
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td class="x-btn-bl"><i>&nbsp;</i></td>
+                                                                                <td class="x-btn-bc"></td>
+                                                                                <td class="x-btn-br"><i>&nbsp;</i></td>
+                                                                            </tr>
+
+                                                                        </tbody>
+
+                                                                    </table>
+
+                                                                </td>
+
+                                                            </tr>
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </td>
+
+                                                <td>
+
+                                                    <table cellspacing="0">
+                                                        <tbody>
+                                                            <tr class="x-toolbar-extras-row"></tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
                 </div>
             </div>
+            <!-- good  -->
+
         </div>
 
-        <div class="x-panel-bbar x-panel-bbar-noborder" id="ext-gen51" style="width: 500px;">
-            <div id="ext-comp-1013" class="x-toolbar x-small-editor x-toolbar-layout-ct" style="height: 31px; width: 496px;">
+    </div>
 
-                <table cellspacing="0" class="x-toolbar-ct">
-                    <tbody>
-                        <tr>
-                            <td class="x-toolbar-left" align="left">
-                                <table cellspacing="0">
-                                    <tbody>
-                                        <tr class="x-toolbar-left-row">
-                                            <td class="x-toolbar-cell" id="ext-gen63">
-                                                <table cellspacing="0" class="x-btn  x-btn-text-icon " id="ext-comp-1016" style="height: 30px; width: auto;">
-                                                    <tbody class="x-btn-small x-btn-icon-small-left">
+    <!-- - -->
+    <!-- - -->
+    <!-- - -->
+    <!-- end -->
 
-                                                        <tr>
-                                                            <td class="x-btn-tl"><i>&nbsp;</i></td>
-                                                            <td class="x-btn-tc"></td>
-                                                            <td class="x-btn-tr"><i>&nbsp;</i></td>
-                                                        </tr>
+    <div id="ext-comp-1019" class=" x-panel master-quiz-panel x-panel-noborder ">
 
-                                                        <tr>
-                                                            <td class="x-btn-ml"><i>&nbsp;</i></td>
-                                                            <td class="x-btn-mc"> 
-                                                                <em class="" unselectable="on"> 
-                                                                    <button  class="x-btn-text icon-arrow_left" type="button" id="ext-gen65">Предыдущее</button>
-                                                                </em>   
-                                                            </td>
-                                                        
-                                                            <td class="x-btn-mr"><i>&nbsp;</i></td>
-                                                        </tr>
+        <div class="x-panel-bwrap" id="ext-gen61">
 
-                                                        <tr>
-                                                            <td class="x-btn-bl"><i>&nbsp;</i></td>
-                                                            <td class="x-btn-bc"></td>
-                                                            <td class="x-btn-br"><i>&nbsp;</i></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
+            <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen62" style="height: auto;">
 
-                                            <td class="x-toolbar-cell" id="ext-gen66">
-                                                <span  class="xtb-sep" id="ext-gen67"></span>
-                                            </td>
+                <div id="quiz-item-1-ext-gen33" class=" x-panel quiz-item-container-panel x-panel-noborder" style="margin-right: 20px; width: auto;">
 
-                                            <td class="x-toolbar-cell" id="ext-gen68">
-                                                <table cellspacing="0" class="x-btn  x-btn-text-icon" id="ext-comp-1015" style="height: 30px; width: auto;">
-                                                    <tbody class="x-btn-small x-btn-icon-small-right">
+                    <div class="x-panel-bwrap" id="ext-gen90">
 
-                                                        <tr>
-                                                            <td class="x-btn-tl"><i>&nbsp;</i></td>
-                                                            <td class="x-btn-tc"></td>
-                                                            <td class="x-btn-tr"><i>&nbsp;</i></td>
-                                                        </tr>
+                        <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen91" style="width: auto; height: auto; visibility: visible;">
 
-                                                        <tr>
-                                                            <td class="x-btn-ml"><i>&nbsp;</i></td>
+                            <div id="ext-comp-1023" class=" x-plain master-question-panel quiz-item-panel x-plain-noborder" style="width: auto;">
+                                    
+                                <h3 class="master-question-title x-plain-header-noborder x-unselectable" id="ext-gen92">
+                                    <span class="question-number" id="ext-gen96"> </span>
+                                    Питання1
+                                </h3>
 
-                                                            <td class="x-btn-mc">
-                                                                <em class="" unselectable="on">
-                                                                    <button class="x-btn-text icon-arrow_right" type="button"  id="ext-gen70">Далее</button>
-                                                                </em>
-                                                            </td>
+                                <div class="x-plain-bwrap" id="ext-gen93">
 
-                                                            <td class="x-btn-mr"><i>&nbsp;</i></td>
-                                                        </tr>
+                                    <div class="x-plain-body x-plain-body-noborder" id="ext-gen94" style="width: auto; height: auto;">
 
-                                                        <tr>
-                                                            <td class="x-btn-bl"><i>&nbsp;</i></td>
-                                                            <td class="x-btn-bc"></td>
-                                                            <td class="x-btn-br"><i>&nbsp;</i></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
+                                        <div id="ext-comp-1024" class=" x-panel x-panel-noborder">
 
-                            <td class="x-toolbar-right" align="right">
-                                <table cellspacing="0" class="x-toolbar-right-ct">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <table cellspacing="0">
-                                                    <tbody>
-                                                        <tr class="x-toolbar-right-row">
+                                            <div class="x-panel-bwrap" id="ext-gen97">
+                                                <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen98" style="height: auto;">
+                                                </div>
+                                            </div>
 
-                                                            <td class="x-toolbar-cell x-hide-display"  id="ext-gen71">
+                                        </div>
 
-                                                                <div id="quiz-timer-ext-gen24"  class=" x-panel"  style="width: 50px;">
-                                                                    <div class="x-panel-bwrap"id="ext-gen72">
-                                                                        <div  class="x-panel-body x-panel-body-noheader"  id="ext-gen73" style="width: 48px; height: 18px;">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </td>
-
-                                                            <td class="x-toolbar-cell" id="ext-gen74">
-                                                                <span  class="xtb-sep" id="ext-gen75"></span>
-                                                            </td>
-
-                                                            <td class="x-toolbar-cell" id="ext-gen76">
-                                                                <table cellspacing="0"  class="x-btn  x-btn-text-icon" id="ext-comp-1008" style="height: 30px; width: auto;">
-                                                                    <tbody class="x-btn-small x-btn-icon-small-left">
-                                                                                                                <tr>
-                                                                                                                    <td
-                                                                                                                        class="x-btn-tl"><i>&nbsp;</i></td>
-                                                                                                                    <td
-                                                                                                                        class="x-btn-tc"></td>
-                                                                                                                    <td
-                                                                                                                        class="x-btn-tr"><i>&nbsp;</i></td>
-                                                                                                                </tr>
-                                                                                                                <tr>
-                                                                                                                    <td
-                                                                                                                        class="x-btn-ml"><i>&nbsp;</i></td>
-                                                                                                                    <td
-                                                                                                                        class="x-btn-mc"><em
-                                                                                                                            class=""
-                                                                                                                            unselectable="on"><button
-                                                                                                                                class="x-btn-text icon-tick"
-                                                                                                                                type="button"
-                                                                                                                                id="ext-gen78"
-                                                                                                                                name="finish_button">Закончить</button></em></td>
-                                                                                                                    <td
-                                                                                                                        class="x-btn-mr"><i>&nbsp;</i></td>
-                                                                                                                </tr>
-                                                                                                                <tr>
-                                                                                                                    <td
-                                                                                                                        class="x-btn-bl"><i>&nbsp;</i></td>
-                                                                                                                    <td
-                                                                                                                        class="x-btn-bc"></td>
-                                                                                                                    <td
-                                                                                                                        class="x-btn-br"><i>&nbsp;</i></td>
-                                                                                                                </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <table cellspacing="0">
-                                                                                            <tbody>
-                                                                                                <tr class="x-toolbar-extras-row"></tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                        <div id="ext-comp-1025" class=" x-panel x-panel-noborder">
+                                            <div class="x-panel-bwrap" id="ext-gen99">
+                                                <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen100" style="height: auto;">
                                                 </div>
                                             </div>
                                         </div>
 
+                                        <div id="ext-comp-1026" class=" x-panel x-panel-noborder">
 
+                                            <div class="x-panel-bwrap" id="ext-gen101">
+
+                                                <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen102" style="height: auto;">
+
+                                                    <div id="ext-comp-1027" class=" x-panel x-panel-noborder" style="width: auto;">
+
+                                                        <div class="x-panel-bwrap"  id="ext-gen103">
+
+                                                            <div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen104" style="width: auto; height: auto;">
+
+                                                                <div class="x-form-item  x-hide-label" tabindex="-1">
+
+                                                                    <label for="ext-comp-1057" style="width:100px;"class="x-form-item-label"></label>
+
+                                                                    <div class="x-form-element" id="x-form-el-ext-comp-1057" style="padding-left:105px">
+
+                                                                        <div class="x-form-check-wrap" id="ext-gen105" style="height: auto;">
+
+                                                                            <input type="radio" autocomplete="off" id="ext-comp-1057" name="question_answer_1" class=" x-form-radio x-form-field" value="1">                                                             
+                                                                            <label  for="ext-comp-1057" class="x-form-cb-label" id="ext-gen106">Відповіть1</label>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="x-form-clear-left"></div>
+
+                                                                </div>
+
+                                                                <div class="x-form-item  x-hide-label" tabindex="-1">
+
+                                                                    <label for="ext-comp-1058" style="width:100px;" class="x-form-item-label"></label>
+
+                                                                    <div class="x-form-element" id="x-form-el-ext-comp-1058" style="padding-left:105px">
+
+                                                                        <div class="x-form-check-wrap" id="ext-gen107" style="height: auto;">
+                                                                            
+                                                                            <input type="radio" autocomplete="off"  id="ext-comp-1058" name="question_answer_1" class=" x-form-radio x-form-field" value="2">
+                                                                            <label  for="ext-comp-1058" class="x-form-cb-label" id="ext-gen108">Відповіть2</label>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="x-form-clear-left"> </div>
+
+                                                                </div>
+
+                                                                <div class="x-form-item  x-hide-label" tabindex="-1">
+
+                                                                    <label for="ext-comp-1059" style="width:100px;" class="x-form-item-label"></label>
+
+                                                                    <div class="x-form-element"  id="x-form-el-ext-comp-1059"  style="padding-left:105px">
+
+                                                                        <div class="x-form-check-wrap" id="ext-gen109"  style="height: auto;">
+
+                                                                                <input type="radio" autocomplete="off" id="ext-comp-1059" name="question_answer_1" class=" x-form-radio x-form-field" value="3">
+                                                                                <label for="ext-comp-1059" class="x-form-cb-label" id="ext-gen110">Відповіть3</label>
+                                                                                
+                                                                        </div>
+
+                                                                    </div> 
+
+                                                                    <div class="x-form-clear-left"></div>
+
+                                                                </div>
+
+                                                                <div class="x-form-item  x-hide-label"  tabindex="-1">
+
+                                                                    <label for="ext-comp-1060"  style="width:100px;" class="x-form-item-label"></label>
+
+                                                                    <div class="x-form-element" id="x-form-el-ext-comp-1060" style="padding-left:105px">
+                                                                        <div class="x-form-check-wrap" id="ext-gen111" style="height: auto;">
+                                                                            
+                                                                            <input type="radio" autocomplete="off" id="ext-comp-1060" name="question_answer_1" class=" x-form-radio x-form-field" value="4">
+                                                                            <label for="ext-comp-1060" class="x-form-cb-label" id="ext-gen112">Відповіть4</label>
+
+                                                                        </div>
+                                                                    </div> 
+
+                                                                    <div class="x-form-clear-left"></div>
+
+                                                                </div> 
+
+                                                                <div class="x-form-item  x-hide-label" tabindex="-1">
+
+                                                                    <label for="ext-comp-1061" style="width:100px;"  class="x-form-item-label"></label>
+
+                                                                    <div class="x-form-element" id="x-form-el-ext-comp-1061" style="padding-left:105px">
+
+                                                                        <div class="x-form-check-wrap" id="ext-gen113" style="height: auto;">
+                                                                        
+                                                                            <input type="radio" autocomplete="off" id="ext-comp-1061" name="question_answer_1" class=" x-form-radio x-form-field" value="5">
+                                                                            <label for="ext-comp-1061" class="x-form-cb-label" id="ext-gen114">Відповіть5</label>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="x-form-clear-left"></div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- - -->
+    <!-- - -->
+    <!-- - -->
     <!-- end -->
+
 
 </body>
 </html>
