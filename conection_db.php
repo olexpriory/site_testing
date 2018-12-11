@@ -25,5 +25,8 @@
         exit();
     }
    
+
+    //CREATE TABLE `testrow`. ( `id_tets` INT(11) NOT NULL AUTO_INCREMENT , `testname` VARCHAR(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , `testputh` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL , `active` BOOLEAN NOT NULL , PRIMARY KEY (`id_tets`)) ENGINE = InnoDB
+    //INSERT INTO `tests` (`id_tets`, `testname`, `testputh`, `active`) VALUES (NULL, 'test N 1', 'testN1', '1');
 ?>
 

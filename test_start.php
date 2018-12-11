@@ -10,8 +10,8 @@
 <?php// include("includes/header.php"); ?>
 
 <div id="welcome">
-<h2>Добро пожаловать, <span><?php echo $_SESSION['session_username'];?>! </span></h2>
-  <p><a href="logout.php">Выйти</a> из системы</p>
+  <h2 align="right">Доброго дня, <span><?php echo $_SESSION['session_username'];?>! </span></h2>
+  <p align="right"><a href="logout.php">Вийти</a> з системи </p>
 </div>
 	
 <?php include("test_active.php"); ?>
