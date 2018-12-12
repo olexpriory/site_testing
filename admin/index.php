@@ -15,6 +15,13 @@
         <button class="btn btn-lg btn-primary btn-block" name="CreateNewTest" type="submit">Створити новий тест</button>
     </form>
 </div>
+<br>
+<div class="container">
+    <form action="group_control.php" method="POST">
+        <button class="btn btn-lg btn-primary btn-block" name="group" type="submit">Підрозділи</button>
+    </form>
+</div>
+
 <br><br>
 
 <?php  require ('tests_edit.php');?>
