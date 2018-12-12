@@ -553,7 +553,7 @@
             
             <!-- good  -->
             <div class="x-panel-bbar x-panel-bbar-noborder" id="ext-gen51" style="background: blue; width: 500px;">
-                <div id="ext-comp-1013" class="x-toolbar x-small-editor x-toolbar-layout-ct" style="height: 31px; width: 496px;">
+                <div id="ext-comp-1013" class="x-toolbar x-small-editor x-toolbar-layout-ct" style="height: 71px; width: 496px;">
                     <table cellspacing="0" class="x-toolbar-ct">
 
                         <tbody>
@@ -759,7 +759,7 @@
     <!-- - -->
     <!-- end -->
 
-    <div id="ext-comp-1019" class=" x-panel master-quiz-panel x-panel-noborder ">
+    <div id="ext-comp-1019" class=" x-panel master-quiz-panel x-panel-noborder" style="background: green;">
 
         <div class="x-panel-bwrap" id="ext-gen61">
 
