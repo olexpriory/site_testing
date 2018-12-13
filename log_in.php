@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,14 +33,22 @@
               ?>
                     <!--== +++++++++++++ ==--> 
                     <?php if($conterdata > 0){ ?>
-                        <input type="text" name="user_lastname" class="form-control" placeholder="По батькорвi" required>   
+                        <input type="text" name="user_lastname" class="form-control" <?php if(isset($userlastname)) echo "value = \"$userlastname\""; else echo "placeholder=\"По батьковi\" required";?> >   
                     <?php } ?>
 
                     <?php if($conterdata > 1){ ?>
                         <select name='user_rung' class="form-control" required>
-                            <option  value=""> Звання </option>";
+                        
 
                             <?php
+
+                                if(isset($userrung_id)){
+                                    $result = mysqli_query($conection, "SELECT * FROM `user_rung` WHERE id_rung = '$userrung_id'");
+                                    echo "<option value = \"$userrung_id\" >". mysqli_fetch_array($result)['rungname'] . "</option> "; 
+                                }
+                                else echo "<option  value=\"\"> Звання </option>";
+                                
+
                                 $result = mysqli_query($conection, "SELECT * FROM `user_rung`");
 
                                 while ($row = mysqli_fetch_array($result)){
