@@ -20,6 +20,10 @@
         ShowTable('platoon', $conection);   
         
         ShowTable('specialty', $conection);
+
+        ShowTable('users', $conection);
+
+        ShowTable('tests', $conection);
      
     }
 
@@ -39,9 +43,7 @@
 
 <?php
     function ShowTable($table, $conection )
-    {
-        
-
+    {      
         $result = mysqli_query($conection, "SELECT * FROM {$table}");
         $fields_num = mysqli_num_fields($result);
 

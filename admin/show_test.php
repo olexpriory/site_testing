@@ -10,16 +10,21 @@
 
     if($count > 0)
     { 
-      
-            
+                 
         for($iter = 0; $iter < $count; $iter++) {
             $row = mysqli_fetch_row($result);?>
         <!--================================= html code ===============================-->
         <p>
            <a href= <?php echo "\"../$row[2]\"" ?> ><img src="../images/testicon.jpg" width="30" height="30" >
                 <?php echo "$row[1]"?>  
-            </a> 
+            </a>  
+
+            <a href= "crater_php_fie.php?id=<?php echo $row[0]; ?>" >  Редагувати  </a> 
+
+            <a href= "delete_php_fie.php?id=<?php echo $row[0]; ?>" >  Видалити  </a> 
          </p>
+
+        
         <!--============================================================================-->
 
     <?php } } else { ?>

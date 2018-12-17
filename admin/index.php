@@ -9,6 +9,30 @@
 </head>
 <body>
 
+<?php
+    session_start();
+
+
+        if(isset($_SESSION['user_msg'])){
+            $user_msg = $_SESSION['user_msg'];
+            $_SESSION['user_msg'] = null;
+        }
+
+        if(isset($_SESSION['user_err'])){
+            $user_err = $_SESSION['user_err'];
+            $_SESSION['user_err'] = null;
+        }
+    
+?>
+
+<br>
+
+
+<!--=========================== user mesage ============================-->
+ <?php if(isset($user_msg)){ ?><div class="alert alert-success" role="alert"> <?php echo $user_msg; ?> </div><?php } ?>
+ <?php if(isset( $user_err)){ ?><div class="alert alert-danger" role="alert"> <?php echo  $user_err; ?> </div><?php } ?>
+ <!--===================================================================-->
+
 
  <div class="container">
     <form action="create_new_test.php" method="POST">
@@ -16,15 +40,18 @@
     </form>
 </div>
 <br>
+
+
 <div class="container">
     <form action="group_control.php" method="POST">
         <button class="btn btn-lg btn-primary btn-block" name="group" type="submit">Підрозділи</button>
     </form>
 </div>
 
+
 <br><br>
 
-<?php  require ('tests_edit.php');?>
+<?php  require ('show_test.php');?>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
