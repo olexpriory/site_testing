@@ -16,7 +16,18 @@
      
      require ('../conection_db.php');
 
-    if (isset($_GET['id']))
+    if (isset($_POST['save_quest'])) 
+    {
+         $test_id =  $_POST['save_quest']; 
+         $testname = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$test_id' "))['testname'];
+         echo "<h1>Save question</h1>";
+    }
+    elseif (isset($_POST['create_file'])) 
+    {
+         $test_id =  $_POST['create_file'];
+         $testname = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$test_id' "))['testname'];
+    }
+    elseif (isset($_GET['id']))
     {
         $test_id =  $_GET['id'];
         $testname = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$test_id' "))['testname'];
@@ -26,11 +37,6 @@
         $testname = $_SESSION['testname'];
         $test_id = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE testname = '$testname' "))['id_test'];
     }          
-    elseif (isset($_POST['create_file'])) 
-    {
-        $test_id =  $_POST['create_file'];
-        $testname = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$test_id' "))['testname'];
-    }
     else
     {
         echo "<h1> Помилка!!! <h1>";
@@ -75,7 +81,7 @@
                 $functional_code = $functional_code_hedr . $functional_code_body. $functional_code_ehd;
                 file_put_contents($file, $functional_code);
                 session_start();
-                $_SESSION['user_msg'] = "Створено новий тест '$testname'";
+                $_SESSION['user_msg'] = "Збережено тест '$testname'";
                 header("Location: index.php");
         
                 // include ('index.php');
@@ -94,7 +100,7 @@
 
                     <div class="col-8">
                         <h4>
-                            <form action="" method="post" style="width: 100%; ">
+                            <form  action ="crater_php_fie.php" method="post" style="width: 100%; ">
                                 <div class="container" style= "background-color: #C0C0C0">
 
                                         <hr noshade   style = "height: 1px" >    
@@ -106,10 +112,10 @@
 
                                                 <div class="col-6">
                                                     <div class="form-group">     
-                                                        <select class="form-control" id="exampleFormControlSelect1" >
-                                                            <option>Одиночний</option>
-                                                            <option>Вибірковий</option>
-                                                            <option>Текстове поле</option>
+                                                        <select name='type_quest' class="form-control" id="exampleFormControlSelect1"  >
+                                                            <option value="only">Одина відповідь</option>
+                                                            <option value="some">Декілька відповідей</option>
+                                                            <option></option>
                                                             <option>Співвідношення</option>
                                                         </select>                               
                                                     </div>
@@ -227,7 +233,7 @@
                                                 </div>
 
                                                 <div class="col-3">
-                                                    <button type="submit" class="btn btn-primary mb-2" style="margin: 2%">Зберегти питання</button>                                                                   
+                                                    <button type="submit" class="btn btn-primary mb-2" style="margin: 2%" name="save_quest" value = "<?php echo $test_id; ?>">Зберегти питання</button>                                                                   
                                                 </div>
                                                 
                                         </div>

@@ -17,12 +17,15 @@
 
         $test_id = $_POST['Delete'];
         $testname = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$test_id' "))['testname'];
-
-        mysqli_query($conection, "DELETE FROM worker WHERE id = 100")
-        //=======f=g[gpgpgp;;;;;;;;;;;;]
-        
         session_start();
-        $_SESSION['user_msg'] = "Видалено тест '$testname'";
+
+        if( mysqli_query($conection, "DELETE FROM `tests` WHERE  id_test = '$test_id'")){
+            $_SESSION['user_msg'] = "Видалено тест '$testname'";
+        }
+        else{
+            $_SESSION['user_err'] = "Помилка видалення тесту '$testname'";
+        }
+              
         header("Location: index.php");
 
     }
