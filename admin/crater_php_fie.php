@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -13,30 +12,30 @@
 
 
 <?php
-     session_start();
-     require ('../conection_db.php');
-
-
-    if (isset($_POST['create_file'])) 
+    if(!isset($_SESSION)) 
     {
-         $test_id =  $_POST['create_file'];
-         $testname = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$test_id' "))['testname'];
+        session_start();
     }
-    elseif (isset($_GET['id']))
+
+     require ('../conection_db.php');
+     $angl_cont = null;
+     $angl_msg = null;
+     $angl_err = null;
+
+    if (isset($_GET['id']))
     {
         $test_id =  $_GET['id'];
         $testname = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$test_id' "))['testname'];
     }
-     elseif(isset($_SESSION['testname']))
-    {
-        $testname = $_SESSION['testname'];
-        $test_id = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE testname = '$testname' "))['id_test'];
-    }
     elseif (isset($_SESSION['id_test'])) 
     {
-         $test_id = $_SESSION['id_test']; 
-         $testname = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$test_id' "))['testname'];
-         echo "<h1>Save question</h1>";
+        $test_id = $_SESSION['id_test']; 
+        $testname = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$test_id' "))['testname'];
+         
+        if(isset($_SESSION['counter']))$angl_cont = $_SESSION['counter'];
+        if(isset($_SESSION['msg'])) $angl_msg = $_SESSION['msg'];  
+        if(isset($_SESSION['err'])) $angl_err = $_SESSION['err'];
+                                     
     }          
     else
     {
@@ -48,14 +47,140 @@
 
      echo "<br><h1 align=\"center\"> $testname </h1><br>";
 
-                       
-            $query = "SELECT * FROM `questions` WHERE test_id ='$test_id'";
-            $result = mysqli_query($conection, $query) or die(mysqli_error($conection));
-            $count = mysqli_num_rows($result);
+    $query_test = "SELECT * FROM `tests` WHERE id_test ='$test_id'";
+    $result_test = mysqli_query($conection, $query_test) or die(mysqli_error($conection));
+    $row_test = mysqli_fetch_array($result_test);
 
-            if($count > 0){
+    $query = "SELECT * FROM `questions` WHERE test_id ='$test_id'";
+    $result = mysqli_query($conection, $query) or die(mysqli_error($conection));
+    $count = mysqli_num_rows($result);
+
+    
+    $counter_impot = 1;
+
+    if(isset( $row_test['include_impot'])){
+        if($row_test['include_impot'] == 1){
+            $counter_impot =  mysqli_num_rows(mysqli_query($conection, "SELECT * FROM `questions` WHERE test_id ='$test_id' and question_impot = '1'"));
+        }
+    }
+
+    
+    ?>
+
+        <form action="save_test.php" method="POST" style="width:100%">
+            <div class="container" style= "background-color: #C0C0C0; width:100%">
+                <div class="row" style="width:100%">
+
+                    <div class="col-1">
+                        <label for="exampleFormControlSelect1">Всього питань</label>
+                    </div>
+
+                    <div class="col-1">
+                        <div class="form-group" style="margin-top: 4px;">     
+                            <input class="form-control form-control-sm" type="text" value="<?php echo "$count"; ?>" readonly >                               
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <label for="exampleFormControlSelect1">Кількість питань для використання</label>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="form-group" style="margin-top: 4px;">     
+                            <select name='cont_quest' class="form-control" id="exampleFormControlSelect1"  >
+                                <?php
+                                    for($itr = $count; $itr >= $counter_impot; $itr-- )
+                                    {
+                                        $alpha = null;
+
+                                        if(isset($row_test['count_quest'])){
+                                            if($row_test['count_quest'] == $itr){
+                                                $alpha = 1;
+                                            }
+                                        }
+                                        echo "<option value=\"$itr\"" . (isset($alpha) ? "selected" : "") . ">$itr</option>";
+                                    }
+                                    
+                                    
+                                ?>
+                            </select>                               
+                        </div>
+                    </div>
+
+                    <div class="col-1" style="margin-top: 0px;">
+                        <label class="form-check-label"   style="margin-left: 0px; " >
+                            Обов'язкові питання
+                        </label>
+                    </div>
+
+                    <div class="col-1">                               
+                        <div class="form-check" style=" margin-top : 4px; ">                                
+                            <input class="form-check-input" type="checkbox"  name="include_impot" value="1" <?php if(isset ($row_test['include_impot'])){if($row_test['include_impot'] == 1){ echo "checked"; }} ?>> <!--onchange="f_type_quest(value)" -->                                                              
+                        </div>                                                                         
+                    </div>
+
+                    <div class="col-1"style="margin-top: 3px;">
+                        <label class="form-check-label" style="margin-left: 0px;" >
+                            Рандомний вибір
+                        </label>
+                    </div>
+
+                    <div class="col-1">                               
+                        <div class="form-check" style=" margin-top : 4px; ">                                
+                            <input class="form-check-input" type="checkbox"  name="random" value="1"  <?php if(isset ($row_test['random'])){if($row_test['random'] == 1){ echo "checked"; }} ?>>                                                               
+                        </div>                                                                         
+                    </div>
+
+                    <div class="col-2" style="margin-top: 4px;">
+                        <input type="hidden" name="id_test" value="<?php echo $test_id ?>">                               
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Зберегти тест</button>
+                    </div>
+
+                </div>
+
+                
+            </div>
+        </form>
+
+    <?php
+                       
+           
+            if($count > 0)
+            {
                 $counter = 1;
-                while ($row = mysqli_fetch_array($result)){
+
+                if(isset($angl_cont))
+                    if($angl_cont > $count)
+                        $angl_cont = $count;
+
+                while ($row = mysqli_fetch_array($result))
+                {
+
+                    if(isset($angl_cont))
+                    {
+                        
+                        if($angl_cont >= 0 )
+                        {                       
+                            if($angl_cont  == $counter){
+                                echo "<a name=\"angl\"></a>";
+                                ShowInfo( $angl_msg , $angl_err ); 
+                                $_SESSION['counter'] = null;
+                            }
+                                                             
+                        }
+                        else
+                        {
+                            if($counter == $count ){
+                                echo "<a name=\"angl\"></a>";
+                                ShowInfo( $angl_msg , $angl_err );
+                                $_SESSION['counter'] = null;
+                            }
+                                
+                        }
+                    }
+                    
+                        
+
                     Showqvestions(
                                     $counter++,
                                     $row['id_question'],
@@ -66,11 +191,12 @@
                                     $row['questionball'],
                                     $row['questionimg'],
                                     $row['question_impot'],
-                                    $row['test_id']);
+                                    $row['test_id']
+                                );
                 }
             }
             else{
-
+                ShowInfo( $angl_msg , $angl_err );
                 echo "<br> <hr noshade   style = \"height: 3px;\"> ";
                 echo "<br><h4>Відсутні питання!</h4>";
                 echo "<br> <hr noshade   style = \"height: 3px;\"> ";
@@ -78,38 +204,40 @@
 
 
 
-            if (isset($_POST['create_file']))
-            {    
+           // if (isset($_POST['create_file']))
+           // {    
                 
-                include 'crater_php_fie_config.php';    
-                $file = "../tests/$testname.php";
-                $functional_code = $functional_code_hedr . $functional_code_body. $functional_code_ehd;
-                file_put_contents($file, $functional_code);
-                session_start();
-                $_SESSION['user_msg'] = "Збережено тест '$testname'";
-                header("Location: index.php");
+                //include 'crater_php_fie_config.php';    
+                //$file = "../tests/$testname.php";
+                //$functional_code = $functional_code_hedr . $functional_code_body. $functional_code_ehd;
+                //file_put_contents($file, $functional_code);
+
+
+                //session_start();
+                  
+
+               // header("Location: index.php");
         
                 // include ('index.php');
                 //exit;
-            }
+          //  }
        
 ?>   
 
 
-            <!--==================== Form  crete new question ====================-->   
+            <!--==================== Form  crete new question ====================-->  
+
+                <hr noshade   style = "height: 3px;"> <br> 
+
                 <div class="row" >
 
                     <div class="col-2">
-                        <button type="submit" class="btn btn-primary mb-2" >Додати питання</button>                                                                           
+                        <button type="submit" class="btn btn-primary mb-2" onClick="hide_show();return false;" id="link">Додати питання</button>                                                                           
                     </div>
 
-                    <div class="col-8">
+                    <div class="col-8" id="main_form" style="display:none">
                         <h4>
                             <form  action ="save_question.php" method="post" style="width: 100%; ">
-
-                            <div id="link" >
-                                No
-                            </div>
 
                                 <div class="container" style= "background-color: #C0C0C0">
 
@@ -528,14 +656,32 @@
                                         </div>
 
                                 </div>
+
                             </form>
                         </h4>
                     </div>
 
-                </div>   
+                </div> 
+
+                <br>      
+
+                <hr noshade   style = "height: 3px;">  
 
 
                 <script>
+
+
+                    function hide_show()
+                    {
+                        if(document.getElementById("main_form").style.display == "none")
+                        {
+                            document.getElementById("main_form").style.display = "";
+                            document.getElementById("link").innerHTML ="Сховати питання";
+                        }else{
+                            document.getElementById("main_form").style.display = "none";
+                            document.getElementById("link").innerHTML ="Додати питання";
+                        }
+                    }
 
                     function f_type_quest(value){
 
@@ -605,13 +751,11 @@
                 </script>                   
             <!--==================================================================--> 
 
-
 <br>
-<div class="container">
-    <form action="crater_php_fie.php" method="POST">
-        <button class="btn btn-lg btn-primary btn-block" name="create_file" value = "<?php echo $test_id; ?>" type="submit">-- Зберегти тест --</button>
-    </form>
-</div>
+<br>
+
+<br> 
+<br>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -642,6 +786,25 @@
 
 
 <?php
+        function ShowInfo($angl_msg , $angl_err)
+        {
+           
+
+            if(isset($angl_msg)){ 
+                echo "<hr noshade   style = \"height: 3px;\">";
+                ?><div class="alert alert-success" role="alert"> <?php echo $angl_msg; ?> </div><?php 
+                $_SESSION['msg'] = null;
+            }
+            if(isset($angl_err)){ 
+                echo "<hr noshade   style = \"height: 3px;\">";
+            ?><div class="alert alert-danger" role="alert"> <?php echo $angl_err; ?> </div><?php
+            $_SESSION['err'] = null; 
+            }
+        }
+          
+
+
+
     function Showqvestions( 
                             $counter,
                             $id_question,
@@ -654,86 +817,184 @@
                             $question_impot,
                             $test_id 
                           )
-    {  
+    {
+        
+        
+                                if($questiontype == "only")
+                                    $tyte_text =  " Виберіть один із варіантів відповідей! ";
+                                elseif($questiontype == "some")
+                                    $tyte_text =  " Виберіть декілька варіантів відповідей! ";          
+                                elseif($questiontype == "text")       
+                                    $tyte_text =  " Впишіть відповідь в поле! ";
+                                elseif($questiontype == "ratio")
+                                    $tyte_text =  " Встановіть відповідність ";
+                                else
+                                    $tyte_text =  "Помилка в питанні зверніться до викладача!!!";
 
     ?>
-        <hr noshade   style = "height: 3px;"> 
+        <hr noshade   style = "height: 3px;"> <br>
 
-        <form  action ="save_question.php" method="post" style="width: 100%; ">
+        <form  action ="question_editor_delet.php" method="post" style="width: 100%; ">
             <div class="container" style= "background-color: #C0C0C0">
             
+                <!--============ Питання №  =============-->
                 <hr noshade   style = "height: 1px" >
                 <div class="row">
                     <div class="col-12">
-                         <label for="exampleFormControlSelect1"><h3> Питання № $counter </h3></label>
+                                                                                                                    <!--== [Виберіть один / декілька із варіантів]/[ Впишіть відповідь в поле]/[ Встановіть відповідність] ===-->
+                         <label for="exampleFormControlSelect1" ><h5 style = "display : inline"> Питання № <?php echo"$counter  ";  ?></h5> <?php echo"( $tyte_text )"; ?></label>
                     </div>
                 </div>
+                <!--=====================================-->
 
+
+                <!--============ text question  =============-->
+                <hr noshade   style = "height: 1px" >
+                <div class="row" style = "padding:10px">
+                    <div class="col-12" style = "background-color: #C0F0E7;  ">
+
+                        <label for="exampleFormControlSelect1"><h2>
+                            <?php echo "$questiontext" ?>
+                        </h2></label>
+                    </div>
+                </div>
+                <!--=========================================-->
+
+
+                <!--============ Відповіді =============-->
                 <hr noshade   style = "height: 1px" >
                 <div class="row">
                     <div class="col-12">
-                        <label for="exampleFormControlSelect1"><h6>
-                
+
+                            <label for="exampleFormControlSelect1"><h5>Відповіді : </h5></label> <br>
+                     
                             <?php
-                                if($questiontype == "only")
-                                    echo " Виберіть один із варіантів відповідей! ";
-                                elseif($questiontype == "some")
-                                    echo " Виберіть декілька варіантів відповідей! ";          
-                                elseif($questiontype == "text")       
-                                    echo " Впишіть відповідь в поле! ";
-                                elseif($questiontype == "ratio")
-                                    echo " Встановіть відповідність ";
+
+                            
+                                    if($questiontype == "only" || $questiontype == "some")
+                                    {
+                                        echo "<div class=\"container\">";
+
+                                            $mass_answ = explode("\n", $questionanswer);
+
+                                            if($questiontype == "only")
+                                            {
+                                        
+                                                for($iter = 1; $iter <=  $question_answ_count; $iter++)
+                                                {
+                                                    ?>
+                                                        <div class="row">
+
+                                                            <div class="col-1" >
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="exampleRadio"  value="<?php echo "$iter"; ?>" <?php if($iter == 1)echo "checked"; ?>>
+                                                                    <label class="form-check-label" for="exampleRadios">
+                                                                        №<?php echo "$iter";  ?>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-11">
+                                                                <input class="form-control form-control-sm" type="text" value="<?php $buf = $mass_answ[$iter - 1]; echo "$buf";  ?>" name="radio_<?php echo "$iter"; ?>" readonly >
+                                                            </div>
+
+                                                        </div>
+                                                                            
+                                                    <?php
+                                                }                                       
+                                            }
+                                            elseif($questiontype == "some")
+                                            {
+
+                                                $ball = $questionball / (count($mass_answ)-($question_answ_count+3));
+
+                                                for($iter = 1; $iter <=  $question_answ_count; $iter++){
+                                                    ?>
+                                                        <div class="row">
+
+                                                            <div class="col-1" >
+                                                                <div class="form-check">            
+                                                                    <input class="form-check-input" type="checkbox" name="exampleсheckbox_<?php echo "$iter"; ?>"  value="1"  >
+                                                                    <label class="form-check-label" for="exampleсheckbox_<?php echo "$iter"; ?>">
+                                                                        №<?php echo "$iter";  ?>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-11">
+                                                                <input class="form-control form-control-sm" type="text" value="<?php $buf = $mass_answ[$iter - 1]; echo "$buf";  ?>" name="checkbox_<?php echo "$iter"; ?>" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                                            
+                                                    <?php
+                                                }    
+                                               
+                                            }
+                                            
+                                        echo "</div>";
+                                    }
+                                    elseif($questiontype == "text" )
+                                    {
+                                        ?>
+                                            <div class="col-12">
+                                                <input class="form-control form-control-sm" type="text" name = "text_answ" placeholder="">
+                                            </div> 
+                                        <?php
+                                    }
+
+
                             ?>
-
-                        </h6></label>
+                       
                     </div>
                 </div>
+                <!--=====================================-->
 
 
-                <hr noshade   style = "height: 1px" >
+                <!--============ control panel =============-->
+                <hr noshade   style = "height: 1px" >    
                 <div class="row">
-                    <div class="col-12">
-                        <label for="exampleFormControlSelect1"><h3>
-                            <?php echo "$questiontext" ?>
-                        </h3></label>
+
+                    <div class="col-6" style="margin-top : 6px">
+                        <label for="exampleFormControlSelect1"><h5>Кількість балів за <?php if(isset($ball))echo "кожну"; ?> привильну  відповідь: - <?php if(isset($ball))echo "$ball"; else echo "$questionball"; ?>  </h5></label>
                     </div>
-                </div>
-
-
-
-
-
-                <hr noshade   style = "height: 1px" >
-                <div class="row">
-                    <div class="col-12">
-                        <label for="exampleFormControlSelect1"><h3>
-                            <?php echo "$questiontext" ?>
-                        </h3></label>
+                    
+                    <div class="col-3" style="margin-top : 10px">
+                        <label for="exampleFormControlSelect1"><h5> <?php if(isset($question_impot)){if($question_impot == 1){ echo "( Обов'язково! )"; }} ?> </h5></label>
                     </div>
-                </div>
+                    
+                    <form  action ="question_editor_delet.php" method="post">
+                        <input type="hidden" name="id_test" value="<?php echo $test_id ?>">
+                        <input type="hidden" name="id_question" value="<?php echo $id_question ?>">
+                        <input type="hidden" name="counter" value="<?php echo $counter ?>">
 
-    
-        if($questiontype == "only" || $questiontype == "some"){
+                        <div class="col-1">
+                            <input type="hidden" name="option" value="del">
+                            <button class="btn btn-danger btn-primary btn-block" type="submit" style="height : 40px; width: 90px">Видалити</button>                                                                   
+                        </div>
 
-            $mass_answ = explode("\n", $questionanswer);
+                    </form>
 
-            if($questiontype == "only"){
-                for($iter = 1; $iter <=  $question_answ_count; $iter++){
+                    <form  action ="question_editor_delet.php" method="post">
+                        <input type="hidden" name="id_test" value="<?php echo $test_id ?>">
+                        <input type="hidden" name="id_question" value="<?php echo $id_question ?>">
+                        <input type="hidden" name="counter" value="<?php echo $counter ?>">  
 
-                    echo ""
-                    $mass_answ[$iter]
-                }
-            }
+                        <div class="col-1">
+                            <input type="hidden" name="option" value="ed">
+                            <button type="submit" class="btn btn-primary mb-2" style="height : 40px; width: 100px" name="save_quest" value = "<?php echo $test_id; ?>">Редагувати</button>                                                                   
+                        </div>
 
-        }
+                    </form>
+                                                                                                                            
+                </div>                   
+                <!--========================================-->                  
 
+            </div>
+        </form>
 
-        $answer = "<input type=\"text\" name=\"user_lastname\" class=\"form-control\"></input><p>";
+        <br>
 
-        echo "<br><br><p><h4>$questiontext</h4></p><br><br>";
-        echo "$answer";
-
-        echo "<br> <hr noshade   style = \"height: 3px;\"> ";
-
+    <?php
     }
 ?>

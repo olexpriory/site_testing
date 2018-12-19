@@ -52,7 +52,7 @@ if (isset($_POST['save_quest']))
                    }                    
                 } 
 
-                $answer .= "\n##\n";
+                $answer .= "##\n";
                 
             }
 
@@ -87,13 +87,20 @@ if (isset($_POST['save_quest']))
                 
             $result = mysqli_query($conection, $query) or die(mysqli_error($conection));
                 
-            if($result){
-                session_start();
-                $_SESSION['id_test'] = $test_id;           
-                header("Location: crater_php_fie.php");
+            session_start();
+
+            if($result)
+            {              
+                $_SESSION['id_test'] = $test_id;
+                $_SESSION['counter'] = -1; 
+                $_SESSION['msg'] = "Додано нове питаня";                                                
+            }else{
+                $_SESSION['id_test'] = $test_id;
+                $_SESSION['counter'] = -1;              
+                $_SESSION['err'] = "Помилка при збережені питання!!!"; 
             }
             
-            
+            header("Location: crater_php_fie.php#angl");
       
 
         
