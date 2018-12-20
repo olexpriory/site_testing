@@ -14,22 +14,58 @@
 <?php
 
     session_start();
+    require ('conection_db.php');
 
     if(!isset($_SESSION["user_id"]))
     {
         echo "<h1>Помилка ідентифікації</h1>";
         require ('log_in.php');
     }
-      
+
+    $id_user = $_SESSION["user_id"];
+
+    $fio = "  ";
+    $fio .=  mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `users` WHERE id_user = '$id_user' "))['usersurname'];
+    $fio .= "  ";
+    $username =  mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `users` WHERE id_user = '$id_user' "))['username'];
+    $fio .=  $username;
+    $fio .= "  ";
+    $fio .=  mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `users` WHERE id_user = '$id_user' "))['userlastname'];
+    $fio .= "  ";
+
+
+    $rung_id = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `users` WHERE id_user = '$id_user' "))['userrung_id'];
+    $rung = "  ";
+    $rung .= mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `user_rung` WHERE id_rung = '$rung_id' "))['rungname'];
+    $rung .= "  ";
+    
+    $id_comp =  mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `users` WHERE id_user = '$id_user' "))['company_id'];                  
+    $id_plat =  mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `users` WHERE id_user = '$id_user' "))['platoon_id'];                  
+    $id_spec =  mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `users` WHERE id_user = '$id_user' "))['specialty_id'];
+
+    $subdiv = "  Рота №: ";
+    $subdiv .=  mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `company` WHERE id_company = '$id_comp' "))['companynumber'];
+    $subdiv .= "    звод №: ";
+    $subdiv .=  mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `platoon` WHERE id_platoon = '$id_plat' "))['platoonnumber'];
+    $subdiv .= "    спеціальність: ";
+    $subdiv .=  mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `specialty` WHERE id_specialty = '$id_spec' "))['specialtyname'];
+    $subdiv .= ".  ";
     
 ?>
 	
-<?php// include("includes/header.php"); ?>
 
-<div id="welcome">
-  <h2 align="right">Доброго дня, <span><?php echo $_SESSION['user_id'];?>! </span></h2>
-  <p align="right"><a href="logout.php">Вийти</a> з системи </p>
-</div>
+    <div id="welcome" align="right" style="margin-right:10px; height:180px">
+
+    <div style="margin-top:10px; display : inline;"> <h2 style="display : inline"   > Доброго дня,  <?php echo $username; ?> !</h2> </div> <a  href="logout.php" class="btn btn-lg btn-primary btn-block" style="display : inline; " > Вийти з системи </a>  
+        
+        <table cellpadding="5" border="2" style=" margin-top:20px;">
+            <tr>
+                <td><?php echo $fio; ?></td>
+                <td><?php echo $rung; ?></td>
+                <td><?php echo $subdiv; ?></td>
+            </tr>
+        </table>     
+    </div>
 	
 <?php include("test_active.php"); ?>
 	
