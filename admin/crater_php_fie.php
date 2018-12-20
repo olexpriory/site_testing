@@ -61,6 +61,7 @@
     if(isset( $row_test['include_impot'])){
         if($row_test['include_impot'] == 1){
             $counter_impot =  mysqli_num_rows(mysqli_query($conection, "SELECT * FROM `questions` WHERE test_id ='$test_id' and question_impot = '1'"));
+            if($counter_impot == 0)$counter_impot = 1;
         }
     }
 
@@ -115,7 +116,7 @@
 
                     <div class="col-1">                               
                         <div class="form-check" style=" margin-top : 4px; ">                                
-                            <input class="form-check-input" type="checkbox"  name="include_impot" value="1" <?php if(isset ($row_test['include_impot'])){if($row_test['include_impot'] == 1){ echo "checked"; }} ?>> <!--onchange="f_type_quest(value)" -->                                                              
+                            <input onclick="include_impot_onclic()" class="form-check-input" type="checkbox"  name="include_impot" value="1" <?php if(isset ($row_test['include_impot'])){if($row_test['include_impot'] == 1){ echo "checked"; }} ?>> <!--onchange="f_type_quest(value)" -->                                                              
                         </div>                                                                         
                     </div>
 
@@ -133,11 +134,25 @@
 
                     <div class="col-2" style="margin-top: 4px;">
                         <input type="hidden" name="id_test" value="<?php echo $test_id ?>">                               
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Зберегти тест</button>
+                        <button  class="btn btn-lg btn-primary btn-block" type="submit">Зберегти тест</button>
+                        <button id = "btn_save_test_hiden" name="btn_save_test_name" value="cheng_impot" type="submit" style = "display:none"></button>
                     </div>
 
                 </div>
+                <div class="row" style="width:100%; height:40px">                  
+                    <div class="col-4"style="margin-top: 3px;">
+                        <label class="form-check-label" style="margin-left: 0px;" >
+                            Відобразити користувачу результати  
+                        </label>
+                    </div>
 
+                    <div class="col-1">                               
+                        <div class="form-check" style=" margin-top : 6px; margin-left : -80px;">                                
+                            <input class="form-check-input" type="checkbox"  name="show_result" value="1"  <?php if(isset ($row_test['show_result'])){if($row_test['show_result'] == 1){ echo "checked"; }} ?>>                                                               
+                        </div>                                                                         
+                    </div>         
+                </div>               
+                                   
                 
             </div>
         </form>
@@ -204,23 +219,6 @@
 
 
 
-           // if (isset($_POST['create_file']))
-           // {    
-                
-                //include 'crater_php_fie_config.php';    
-                //$file = "../tests/$testname.php";
-                //$functional_code = $functional_code_hedr . $functional_code_body. $functional_code_ehd;
-                //file_put_contents($file, $functional_code);
-
-
-                //session_start();
-                  
-
-               // header("Location: index.php");
-        
-                // include ('index.php');
-                //exit;
-          //  }
        
 ?>   
 
@@ -670,6 +668,13 @@
 
                 <script>
 
+                    function click_edit(value){
+                        document.getElementById(`btn_edit_${value}`).click();
+                    }
+
+                    function include_impot_onclic(){
+                        document.getElementById("btn_save_test_hiden").click();
+                    }
 
                     function hide_show()
                     {
@@ -685,10 +690,7 @@
 
                     function f_type_quest(value){
 
-                        // document.getElementById("radio_block").style.display="block"; 
-                        //var link="empty";
-                        //link= document.getElementById("radio_block").style.display;
-                        //document.getElementById("link").innerHTML=link;
+               
 
                         if(value == "only"){                                                             
                             document.getElementById("radio_block").style.display=""; 
@@ -887,7 +889,7 @@
 
                                                             <div class="col-1" >
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="exampleRadio"  value="<?php echo "$iter"; ?>" <?php if($iter == 1)echo "checked"; ?>>
+                                                                    <input onclick="click_edit(<?php echo $id_question ?>)" class="form-check-input" type="radio" name="exampleRadio"  value="<?php echo "$iter"; ?>" <?php if($iter == explode("\n#\n", $questionanswer)[1])echo "checked"; ?>>
                                                                     <label class="form-check-label" for="exampleRadios">
                                                                         №<?php echo "$iter";  ?>
                                                                     </label>
@@ -905,16 +907,14 @@
                                             }
                                             elseif($questiontype == "some")
                                             {
-
-                                                $ball = $questionball / (count($mass_answ)-($question_answ_count+3));
-
+                                              
                                                 for($iter = 1; $iter <=  $question_answ_count; $iter++){
                                                     ?>
                                                         <div class="row">
 
                                                             <div class="col-1" >
                                                                 <div class="form-check">            
-                                                                    <input class="form-check-input" type="checkbox" name="exampleсheckbox_<?php echo "$iter"; ?>"  value="1"  >
+                                                                    <input onclick="click_edit(<?php echo $id_question ?>)" class="form-check-input" type="checkbox" name="exampleсheckbox_<?php echo "$iter"; ?>"  value="1"  <?php if(in_array("$iter", explode("\n", explode("\n#\n", $questionanswer)[1])))echo "checked"; ?> >
                                                                     <label class="form-check-label" for="exampleсheckbox_<?php echo "$iter"; ?>">
                                                                         №<?php echo "$iter";  ?>
                                                                     </label>
@@ -938,7 +938,7 @@
                                     {
                                         ?>
                                             <div class="col-12">
-                                                <input class="form-control form-control-sm" type="text" name = "text_answ" placeholder="">
+                                                <input onclick="click_edit(<?php echo $id_question ?>)" class="form-control form-control-sm" type="text" name = "text_answ" value = "<?php echo explode("\n#\n", $questionanswer)[1]; ?>" readonly>
                                             </div> 
                                         <?php
                                     }
@@ -956,7 +956,7 @@
                 <div class="row">
 
                     <div class="col-6" style="margin-top : 6px">
-                        <label for="exampleFormControlSelect1"><h5>Кількість балів за <?php if(isset($ball))echo "кожну"; ?> привильну  відповідь: - <?php if(isset($ball))echo "$ball"; else echo "$questionball"; ?>  </h5></label>
+                        <label for="exampleFormControlSelect1"><h5>Кількість балів за <?php if($questiontype == "some")echo "кожну"; ?> привильну  відповідь: - <?php  echo "$questionball"; ?>  </h5></label>
                     </div>
                     
                     <div class="col-3" style="margin-top : 10px">
@@ -982,7 +982,7 @@
 
                         <div class="col-1">
                             <input type="hidden" name="option" value="ed">
-                            <button type="submit" class="btn btn-primary mb-2" style="height : 40px; width: 100px" name="save_quest" value = "<?php echo $test_id; ?>">Редагувати</button>                                                                   
+                            <button id="btn_edit_<?php echo $id_question ?>" type="submit" class="btn btn-primary mb-2" style="height : 40px; width: 100px" name="save_quest" value = "<?php echo $test_id; ?>">Редагувати</button>                                                                   
                         </div>
 
                     </form>

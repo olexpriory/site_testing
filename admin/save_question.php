@@ -16,7 +16,10 @@ if (isset($_POST['save_quest']))
 
         $type_quest = $_POST['type_quest'];
         $text_quest = $_POST['text_quest'];
-        $ball_quest = $_POST['ball_quest']; 
+
+       
+        $ball_quest = $_POST['ball_quest'];
+
 
             if($type_quest == "only" || $type_quest == "some")
                 $count_answ_quest = $_POST['count_answ_quest'];
@@ -31,9 +34,9 @@ if (isset($_POST['save_quest']))
                     $answer .= "\n";
                 } 
                 
-                $answer .= "#\n";
+                $answer .= "\n#\n";
                 $answer .= $_POST["exampleRadio"];
-                $answer .= "\n##\n";
+                $answer .= "\n#\n";
                 
             }
 
@@ -44,23 +47,32 @@ if (isset($_POST['save_quest']))
                     $answer .= "\n";
                 }  
                 
-                $answer .= "#\n";
+                $answer .= "\n#\n";
 
+                $count = 0;
                 for($iter = 1; $iter <=  $count_answ_quest; $iter++){ 
                    if(isset($_POST["exampleсheckbox_$iter"])){
                         $answer .= "$iter\n";
+                        $count++;
                    }                    
                 } 
 
-                $answer .= "##\n";
+                if($count != 0)
+                    $ball_quest =  ($ball_quest /  $count);
+                else
+                    $ball_quest = 0;
+
+                $ball_quest =  round($ball_quest, 2);
+
+                $answer .= "#\n";
                 
             }
 
 
             if($type_quest == "text"){
-                $answer .= "#\n";
+                $answer .= "\n#\n";
                 $answer .= $_POST["text_answ"];
-                $answer .= "\n##\n";
+                $answer .= "\n#\n";
             }
 
 

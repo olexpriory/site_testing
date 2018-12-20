@@ -59,7 +59,7 @@
             return;
         }elseif ($count == 1){
             $fmsg = "Ви один в системі!";
-            $_SESSION['session_username']=$username;
+            $_SESSION['user_id'] = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `users` WHERE username = '$username' "))['id_user'];
             header("Location: test_start.php"); 
             //include ('test_start.php'); 
            // return;       
