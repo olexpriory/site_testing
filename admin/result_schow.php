@@ -28,7 +28,7 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
     $ck_date = isset($_POST['ck_date']);
     $ck_time = isset($_POST['ck_time']);
 
-    
+    echo "date = |" . isset($_POST['ck_date']) . "|<br>";
 
     $rezon = false;
 
@@ -49,7 +49,7 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
       
     if($ck_subdiw_spec)
         if(isset($_POST['ck_subdiw_spec'])){
-            $specialty_id = $_POST['ck_subdiw_spec'];
+            $specialty_id = $_POST['subdiw_spec'];        
             $rezon = true;
         }
 
@@ -86,43 +86,47 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
         if(isset($company_id)){
             $query_main .= $rezon? " and " : "";
             $query_main .= "company_id = $company_id " ;
-            $rezon_main = true;
+            $rezon = true;
         } 
         if(isset($platoon_id)){
             $query_main .= $rezon? " and " : "";
-            $query_main .= "company_id = $platoon_id ";
-            $rezon_main = true;
+            $query_main .= "platoon_id = $platoon_id ";
+            $rezon = true;
         } 
         if(isset($specialty_id)){
             $query_main .= $rezon? " and " : "";
-            $query_main .= "company_id = $specialty_id ";
-            $rezon_main = true;
+            $query_main .= "specialty_id = '$specialty_id' ";
+            $rezon = true;
         }
         if(isset($usersurname)){
             $buf = $query_main;
             $buf .=  $rezon? " and " : "";
-            $buf .= "usersurname = $usersurname ";
+            $buf .= "usersurname = '$usersurname' ";
 
             $res = mysqli_query($conection, $buf);
+            echo "buf1 = $buf <br>  ";
+            echo "mysqli_num_rows1 = " . mysqli_num_rows( $res ) . " <br>  "; 
             if(mysqli_num_rows( $res ) > 0){
                 $query_main .= $rezon? " and " : "";
-                $query_main .= "usersurname = $usersurname ";
-                $rezon_main = true;
+                $query_main .= "usersurname = '$usersurname' ";
+                $rezon = true;
             }else{
-                $username = null;
+                $usersurname = null;
             }
         }
         if(isset($username)){
 
             $buf = $query_main;
             $buf .=  $rezon? " and " : "";
-            $buf .= "username = $username ";
+            $buf .= "username = '$username' ";
 
             $res = mysqli_query($conection, $buf);
+            echo "buf2 = $buf <br>  ";
+            echo "mysqli_num_rows2 = " . mysqli_num_rows( $res ) . " <br>  "; 
             if(mysqli_num_rows($res) > 0){
                 $query_main .= $rezon? " and " : "";
-                $query_main .= "username = $username ";
-                $rezon_main = true;
+                $query_main .= "username = '$username' ";
+                $rezon = true;
             }else{
                 $username = null;
             }
@@ -130,13 +134,15 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
         if(isset($userlastname)){
             $buf = $query_main;
             $buf .=  $rezon? " and " : "";
-            $buf .= "userlastname = $userlastname ";
+            $buf .= "userlastname = '$userlastname' ";
 
             $res = mysqli_query($conection, $buf);
+            echo "buf3 = $buf <br>  ";
+            echo "mysqli_num_rows3 = " . mysqli_num_rows( $res ) . " <br>  "; 
             if(mysqli_num_rows($res) > 0){
                 $query_main .= $rezon? " and " : "";
-                $query_main .= "userlastname = $userlastname ";
-                $rezon_main = true;
+                $query_main .= "userlastname = '$userlastname' ";
+                $rezon = true;
             }
             else{
                 $userlastname = null;
@@ -147,6 +153,9 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
     } 
 
      
+    if($query_main == "SELECT * FROM `users`  WHERE ")
+        $query_main = "SELECT * FROM `users`";
+
     $result = mysqli_query($conection, $query_main) or die(mysqli_error($conection));
     $count = mysqli_num_rows($result);
     echo "count = $count";
@@ -185,7 +194,7 @@ else
    
 
         <form action="result_schow.php" method="POST" style="width:100%;  ">
-            <div class="container" style= "background-color: #C0C0C0; width:100%; height:260px">
+            <div class="container" style= "background-color: #C0C0C0; width:100%; height:360px">
 
 
 
@@ -222,7 +231,7 @@ else
                                         $result = mysqli_query($conection, "SELECT * FROM `company`");
 
                                         while ($row = mysqli_fetch_array($result)){
-                                            echo "<option value=' ".$row['id_company']." '>".$row['companynumber']."</option>";
+                                            echo "<option value='".$row['id_company']."'>".$row['companynumber']."</option>";
                                         }
                                 ?>
                             </select> 
@@ -255,7 +264,7 @@ else
                                     $result = mysqli_query($conection, "SELECT * FROM `platoon`");
 
                                     while ($row = mysqli_fetch_array($result)){
-                                        echo "<option value=' ".$row['id_platoon']." '>".$row['platoonnumber']."</option>";
+                                        echo "<option value='".$row['id_platoon']."'>".$row['platoonnumber']."</option>";
                                     }                                                                   
                                 ?>
                             </select> 
@@ -287,7 +296,7 @@ else
                                     $result = mysqli_query($conection, "SELECT * FROM `specialty`");
 
                                     while ($row = mysqli_fetch_array($result)){
-                                        echo "<option value=' ".$row['id_specialty']." '>".$row['specialtyname']."</option>";
+                                        echo "<option value='".$row['id_specialty']."'>".$row['specialtyname']."</option>";
                                     } 
 
                                 ?>
@@ -327,7 +336,7 @@ else
                                         $res = mysqli_query($conection, $query_sun);                                      
 
                                         while ($row = mysqli_fetch_array($res)){
-                                            echo "<option value=' ".$row['usersurname']." '>".$row['usersurname']."</option>";
+                                            echo "<option value='".$row['usersurname']."'>".$row['usersurname']."</option>";
                                         }
     
                                                                                                         
@@ -347,19 +356,20 @@ else
 
                     <div class="col-2">
                         <div class="form-group" style="margin-top: 4px;">     
-                            <select id="user_name" name='cont_quest' class="form-control" id="exampleFormControlSelect1" style="display:none"   >
-                                <option value=""> Ім'я </option>
+                            <select id="user_name" name='user_name' class="form-control" id="exampleFormControlSelect1" style="display:none"   >
+                                <!--<option value=""> Ім'я </option>-->
                                 <?php
                                     if(isset($username)){                                           
                                         echo "<option value = \"$username\" >". $username . "</option> "; 
                                     }
+                                    else echo "<option  value=\"\">-- Ім'я --</option>";
 
                                     $query_sun = $query_main;
                                     $query_sun .= " GROUP BY username";
                                     $res = mysqli_query($conection, $query_sun);                                      
 
                                     while ($row = mysqli_fetch_array($res)){
-                                        echo "<option value=' ".$row['username']." '>".$row['username']."</option>";
+                                        echo "<option value='".$row['username']."'>".$row['username']."</option>";
                                     }
                                                                                                             
                                 ?>
@@ -379,19 +389,20 @@ else
 
                     <div class="col-2">
                         <div class="form-group" style="margin-top: 4px;">     
-                            <select id="user_lastname" name='cont_quest' class="form-control" id="exampleFormControlSelect1" style="display:none" >
-                                <option value=""> По батькові </option>
+                            <select id="user_lastname" name='user_lastname' class="form-control" id="exampleFormControlSelect1" style="display:none" >
+                                <!--<option value=""> По батькові </option>-->
                                 <?php
                                         if(isset($userlastname)){                                           
                                             echo "<option value = \"$userlastname\" >". $userlastname . "</option> "; 
                                         }
+                                        else echo "<option  value=\"\">-- По батькові --</option>";
     
                                         $query_sun = $query_main;
                                         $query_sun .= " GROUP BY userlastname";
                                         $res = mysqli_query($conection, $query_sun);                                      
     
                                         while ($row = mysqli_fetch_array($res)){
-                                            echo "<option value=' ".$row['userlastname']." '>".$row['userlastname']."</option>";
+                                            echo "<option value='".$row['userlastname']."'>".$row['userlastname']."</option>";
                                         }                                                                    
                                 ?>
                             </select>  
@@ -405,7 +416,7 @@ else
                     
                 </div>
 
-                <div class="row" style="width:100%;">
+                <div class="row" style="width:100%; height:70px">
 
 
                     <div class="col-2">
@@ -415,7 +426,7 @@ else
 
                     <div class="col-1">                               
                         <div class="form-check" style=" margin-top : 10px; margin-left : 60px;">                                
-                            <input id="check_date" onclick="click_check('date')" class="form-check-input" type="checkbox"  name="ck_date" value="1" <?php  if($ck_user_lastname) echo"checked"; ?>>            
+                            <input id="check_date" onclick="click_check('date')" class="form-check-input" type="checkbox"  name="ck_date" value="1" <?php  if($ck_date) echo"checked"; ?>>            
                         </div>                                                                         
                     </div>
 
@@ -492,7 +503,35 @@ else
                 </div>
 
 
+                                                        
+                <div class="row" style="width:100%; height:80px">
 
+                    <div class="col-3">
+                        <label for="exampleFormControlSelect1">Тести</label>
+                    </div>
+                                
+                    <div class="col-8" style="margin-top: 4px;"> 
+                        <select id = "tests" name='tests' class="form-control"     >
+                                <!--<option value=""> Всі тести </option> -->
+                                <?php
+
+                                        if(isset($testname)){
+                                            $result = mysqli_query($conection, "SELECT * FROM `tests` WHERE testname = '$testname'");
+                                            echo "<option value = \"$testname\" >$testname</option> "; 
+                                        }
+                                        else echo "<option  value=\"\">-- Всі тести --</option>";
+
+                                        $result = mysqli_query($conection, "SELECT * FROM `tests`");
+
+                                        while ($row = mysqli_fetch_array($result)){
+                                            echo "<option value='".$row['testname']."'>".$row['testname']."</option>";
+                                        }
+                                ?>
+                        </select>                                                    
+                                                         
+                    </div>
+            
+                 </div>
 
 
                 <div class="row" style="width:100%;">
