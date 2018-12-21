@@ -39,12 +39,18 @@
         <button class="btn btn-lg btn-primary btn-block" name="CreateNewTest" type="submit">Створити новий тест</button>
     </form>
 </div>
-<br>
 
 
-<div class="container">
+
+<div class="container" style= " margin-top:10px;">
     <form action="group_control.php" method="POST">
         <button class="btn btn-lg btn-primary btn-block" name="group" type="submit">Підрозділи</button>
+    </form>
+</div>
+
+<div class="container" style= " margin-top:10px;">
+    <form action="result_schow.php" method="POST">
+        <button class="btn btn-lg btn-primary btn-block" name="result_schow" type="submit">Результати</button>
     </form>
 </div>
 
