@@ -24,7 +24,7 @@ if (isset($_POST['id_test']))
             $_SESSION['msg'] = ($include_impot == "1") ? "Вімкнено обовязкові питання" : "Вимкнено обовязкові питання";
             $_SESSION['err'] = null;
 
-            header("Location: crater_php_fie.php");
+            header("Location: create_test_basic.php");
             exit;
         }
     }

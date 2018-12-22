@@ -23,7 +23,7 @@ if (
             $_SESSION['msg'] = "Видалено питання! № ~$counter";
         }
         else{
-            $_SESSION['err'] = "Помилка видалення!";
+            $_SESSION['err'] = "Помилка видалення! id = |" . $id_quest . "|";
         }
 
 
@@ -34,7 +34,7 @@ if (
 
     }
 
-    header("Location: crater_php_fie.php#angl");
+    header("Location: create_test_basic.php#angl");
 
 }else{
    echo "<h1> Помилка!!! </h1>";

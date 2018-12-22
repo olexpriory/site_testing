@@ -8,9 +8,6 @@ if (isset($_POST['save_quest']))
     $testname = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$test_id' "))['testname'];
         
 
-    
-
-
     if(isset($_POST['type_quest']))
     {
 
@@ -112,10 +109,7 @@ if (isset($_POST['save_quest']))
                 $_SESSION['err'] = "Помилка при збережені питання!!!"; 
             }
             
-            header("Location: crater_php_fie.php#angl");
-      
-
-        
+            header("Location: create_test_basic.php#angl");   
     }
   
     echo "<h1> Error </h1>";

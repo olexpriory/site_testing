@@ -9,17 +9,16 @@
 </head>
 <body>
      
-        <br> 
-        <br> 
-        <br> 
+        <br><br><br> 
+
+
         <div class="container">
 
             <!--=========================== user mesage ============================-->  
             <?php if(isset($ecntmsg)){ ?><div class="alert alert-danger" role="alert"> <?php echo $ecntmsg; ?> </div><?php } ?> 
             <!--=====================================================================-->   
 
-            <form class="form-signin" action="creater_test.php" method="post"> 
-                  
+            <form class="form-signin" action="create_new_test_control.php" method="post">                 
                 <input type="text" name="testname" class="form-control"  placeholder= "Назва тесту" required >
                 <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Створити</button>

@@ -49,7 +49,7 @@
 </div>
 
 <div class="container" style= " margin-top:10px;">
-    <form action="result_schow.php" method="POST">
+    <form action="show_results.php" method="POST">
         <button class="btn btn-lg btn-primary btn-block" name="result_schow" type="submit">Результати</button>
     </form>
 </div>

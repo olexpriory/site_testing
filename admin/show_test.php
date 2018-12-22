@@ -19,9 +19,12 @@
                 <?php echo "$row[1]"?>  
             </a>  
 
-            <a href= "crater_php_fie.php?id=<?php echo $row[0]; ?>" >  Редагувати  </a> 
+            <a href= "create_test_basic.php?id=<?php echo $row[0]; ?>" >  Редагувати  </a> 
+            <a href= "delete_test.php?id=<?php echo $row[0]; ?>" >  Видалити  </a> 
 
-            <a href= "delete_php_fie.php?id=<?php echo $row[0]; ?>" >  Видалити  </a> 
+           
+
+
          </p>
 
         
