@@ -13,7 +13,7 @@
 
 require ('../conection_db.php');
 
-if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POST['show_show']))
+if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POST['show_show']) || isset($_POST['show_detal']))
 {
     
 
@@ -29,14 +29,19 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
     $ck_time = isset($_POST['ck_time']);
 
     if(isset($_POST['tests']))
-    $testname =  $_POST['tests'];
+        $testname =  $_POST['tests'];
 
-    if($ck_date ){
+    if($ck_date )
         $date = $_POST['date'];
+    else
+        $date = null;
 
-        if($date != "")
-        {
-            $query = "SELECT * FROM `result_user_test` WHERE dateteusing = '$date'";
+       
+            $query = "SELECT * FROM `result_user_test` "; 
+            $query .= (isset($date) && $date != "") ? "WHERE dateteusing = '$date'" : "";
+           // echo "query = $query ";  
+           
+
             $result = mysqli_query($conection, $query) or die(mysqli_error($conection));
 
             $itt = 0;
@@ -45,10 +50,11 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
                 $test_arr[$itt++] = $row['test_id'] ;           
             }
 
+            if(isset($test_arr))
             $test_arr = array_unique($test_arr);
-        }
         
-    }
+        
+    
 
    
 
@@ -184,7 +190,7 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
 
     $result = mysqli_query($conection, $query_main) or die(mysqli_error($conection));
     $count = mysqli_num_rows($result);
-    echo "count = $count";
+   // echo "count = $count";
 
 
     
@@ -208,9 +214,6 @@ else
 {
     echo "<h1> Помилка!!! </h1>";
 
-    echo $_POST['show_reload'];
-    echo $_POST['show_show'];
-    echo $_POST['result_schow'];
     exit;             
 }
 
@@ -219,10 +222,23 @@ else
 ?>
 
 <br>
+
+                        <div  class="container">
+                            <div class="row" style="width:100%;">
+                                
+                                <div class="col-12" style="margin-top: 0px;"> 
+                                 
+                                    <a href="index.php" class="btn btn-lg btn-primary btn-block">Повернутися до головної панелі</a>
+            
+                                </div>
+            
+                            </div>
+                        </div>
+                        <br>
    
 
         <form action="result_schow.php" method="POST" style="width:100%;  ">
-            <div class="container" style= "background-color: #C0C0C0; width:100%; height:285px">
+            <div id="main_header_block" class="container" style= "background-color: #C0C0C0; width:100%; height:285px; <?php if(isset($_POST['show_detal'])) echo " display:none " ?>">
 
                 <div class="row" style="width:100%; height:20px ">
                 </div>  
@@ -511,28 +527,12 @@ else
                         <select onchange="click_reload()" id = "tests" name='tests' class="form-control"     >
                                 <!--<option value=""> Всі тести </option> -->
                                 <option value=""> Всі тести </option>
-                                <?php
+                                <?php          
 
-                                        if(!isset($test_arr)){
-                                            $result = mysqli_query($conection, "SELECT * FROM `tests`");
-
-                                            while ($row = mysqli_fetch_array($result))
+                                        if(isset($test_arr))
+                                        {                                      
+                                            foreach($test_arr as $id_test)
                                             {
-                                                $str = "<option value='" . $row['testname'] . "' ";
-
-                                                if(isset($testname)){
-                                                    if($testname == $row['testname']){
-                                                        $str .= " selected";                                                      
-                                                    }
-                                                }
-
-                                                $str .= ">" . $row['testname'] . "</option>";
-                                                echo $str;
-                                            }
-                                        }
-                                        else{
-
-                                            foreach($test_arr as $id_test){
                                                 $buf_name_test = mysqli_fetch_array( mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = $id_test"))['testname'];
                                                 $str = "<option value='$buf_name_test' ";
                                                 if(isset($testname)){
@@ -545,6 +545,7 @@ else
                                                 echo $str;
                                             }
                                         }
+                                        
                                 ?>
                         </select>  
                       
@@ -559,8 +560,9 @@ else
                                 
                     <div class="col-12" style="margin-top: -15px;"> 
 
-                        <button  id="btn_reload" class="btn btn-lg btn-primary btn-block" name ="show_reload"  style="display:none" value="1" type="submit">reload</button> 
-                        <button  class="btn btn-lg btn-primary btn-block" name ="show_show" value="1" type="submit">Відобразити результат</button>
+                        <button  id="btn_reload" class="btn btn-lg btn-primary btn-block" name ="show_reload"  style="display:none" value="1" type="submit">reload</button>
+                        <button  id="btn_show_detal" class="btn btn-lg btn-primary btn-block" name ="show_detal"  style="display:none"  type="submit">reload</button>  
+                        <button  id="btn_show_show_sh" class="btn btn-lg btn-primary btn-block" name ="show_show" value="1" type="submit">Відобразити результат</button>
 
                     </div>
 
@@ -573,7 +575,7 @@ else
 
 
 
-        <div class="container" style= "background-color: #C0C0C0; margin-top:100px;">
+        <div  style= "background-color: #C0C0C0; margin-top:100px;  margin-left:20px; width:97%; padding: 10px;">
             
             <hr noshade   style = "height: 1px" >
 
@@ -592,25 +594,35 @@ else
                     
                     $fat_err = false;
                     $err =false;
+                    $err_noresult = false;
 
                     
-                   // $testname
-                   // $test_arr
 
                     if(!isset($id_users_arr) || !isset($testname) )
                         $fat_err = true;
-                   // else
-                    if(count($id_users_arr) <= 0)  
+                    else
+                    if(!isset($test_arr))
+                        $err_noresult = true;
+                    else   
+                    if(count($id_users_arr) <= 0 || count($test_arr) <= 0)  
                         $err = true;
-                   // else
-                    if($testname == "" && isset($test_arr) && count($test_arr) <= 0)
-                        $err = true;
+                  
 
                     if($fat_err){
                         ?>
                         <div class="row"> 
                             <div class="col-12">                                                                                                                   
                                 <h1 align="center"> Невірний запит!!! </h1>
+                            </div>                            
+                        </div>
+                        <?php
+
+                    }
+                    elseif($err_noresult){
+                        ?>
+                        <div class="row"> 
+                            <div class="col-12">                                                                                                                   
+                                <h1 align="center"> Результатів в системі не має зовсім! </h1>
                             </div>                            
                         </div>
                         <?php
@@ -627,73 +639,85 @@ else
                     }else{
                         ?>
                         <div class="row"> 
-                            <div class="col-12">                                                                                                                   
-                            <?php
-                                    $it = 1;
+                            <div class="col-12">
 
-                                    if($testname == "")
-                                    {
-                                        if(isset($test_arr))
+                                <?php TableHeader(); ?>
+                                
+                                
+                                    <?php
+
+                                        $it = 1;
+
+                                        if($testname == "")
                                         {
-                                            foreach($test_arr as $test_id)
-                                            {
-                                               // echo "am work  = |$test_id|<br>";
-
-                                                foreach($id_users_arr as $user_id)
+                                            
+                                                foreach($test_arr as $test_id)
                                                 {
-                                                    
-                                                    $query = "SELECT * FROM `result_user_test` WHERE `user_id` = $user_id and test_id = $test_id ";
-                                                    if(isset($date) && $date != "")$query .= " and dateteusing = '$date'";
-                                                    ShowTable($query, $conection , $it++);
-                                                }                                                    
-                                            }
+                                                // echo "am work  = |$test_id|<br>";
+
+                                                    echo " <tr> ";
+                                                        $testname = mysqli_fetch_array( mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = $test_id"))['testname'];
+                                                        echo " <td colspan=\"16\" align=\"center\"> <div>  <h5 style=\"display:inline-block;\">$testname</h5>  <span style=\"display:inline-block; margin-left : 15px\"> [id : '$test_id']</span> </div> </td> ";               
+                                                    echo " </tr> \n";
+                                                    //echo " </table> \n";
+
+                                                    foreach($id_users_arr as $user_id)
+                                                    {                                                                                                     
+                                                        ShowTable($user_id, $test_id, $date, $conection);
+                                                    }
+                                                                                                                                                         
+                                                }
+                                        
                                         }
                                         else
                                         {
+                                            $test_id = mysqli_fetch_array( mysqli_query($conection, "SELECT * FROM `tests` WHERE  testname = '$testname'"))['id_test'];
+
+                                            echo " <tr> ";    
+                                            echo " <td colspan=\"16\" align=\"center\"> <div>  <h5 style=\"display:inline-block;\">$testname</h5>  <span style=\"display:inline-block; margin-left : 15px\"> [id : '$test_id']</span> </div> </td> ";            
+                                            echo " </tr> \n";
+                                         
+
                                             foreach($id_users_arr as $user_id)
-                                            {       
-                                                $query = "SELECT * FROM `result_user_test` WHERE `user_id` = $user_id ";
-                                                if(isset($date) && $date != "")$query .= " and dateteusing = '$date'";
-                                                ShowTable($query, $conection, $it++ );
+                                            {
+                                                ShowTable($user_id, $test_id, $date, $conection);
                                             }
                                         }
-                                    }
-                                    else
-                                    {
-                                        foreach($id_users_arr as $user_id)
-                                        {
-                                            $test_id = mysqli_fetch_array( mysqli_query($conection, "SELECT * FROM `tests` WHERE  testname = '$testname'"))['id_test'];
-                                            $query = "SELECT * FROM `result_user_test` WHERE `user_id` = $user_id and test_id = $test_id";
-                                            if(isset($date) && $date != "")$query .= " and dateteusing = '$date'";
-                                            ShowTable($query, $conection, $it++ );
-                                        }
-                                    }
 
 
-                                   
-                                       
-
-
-                                    
-                            ?>
+                             
+                                    ?>
+                                </table>
                             </div>
 
                         </div>                       
                         <?php
                     }
 
-
-
-
-
-
-
                 }
 
+                if(isset($_POST['show_detal']))
+                {
+                    ?>
+                        <div class="row"> 
+                            <div class="col-12">
+                                <?php  show_table_result($_POST['show_detal'], $conection);?>
+                            </div>
+                        </div>
 
+                        <hr noshade   style = "height: 1px" >
+
+                        <div class="row"> 
+                            <div class="col-12">
+                                <button onclick="clic_back()"  class="btn btn-lg btn-primary btn-block" >Повернутись</button>
+                            </div>
+                        </div>
+
+                        <br>
+
+                    <?php
+                }
                 ?>
-
-
         </div>
 
         <br>
@@ -702,6 +726,18 @@ else
 
 
         <script>
+
+            function clic_back()
+            {               
+                document.getElementById("btn_show_show_sh").click();
+            }
+
+            function click_show_detal(id_res){
+                document.getElementById("btn_show_detal").value = id_res;
+                document.getElementById("btn_show_detal").click();
+            }
+
+
 
 
             window.onload = function() {
@@ -775,46 +811,162 @@ else
 
 
 <?php
-    function ShowTable($query, $conection , $f )
-    {      
+
+    function TableHeader()
+    {
+        ?>
+                                <table border='2'>
+                                    <tr>
+                                        <td> ID-рез</td>
+
+                                        <td> Прізвище </td>
+                                        <td> імя </td>
+                                        <td> По батькові </td>
+                                        <td> Звання </td>
+
+                                        <td> Рота № </td>
+                                        <td> Взвод № </td>
+                                        <td> Спец-сть </td>
+
+                                        <td> id-тест </td>
+                                        <td> Всього <br> балів </td>
+                                        <td> Набрано <br> балів </td>
+                                        <td> - % - </td>
+                                        <td> Оцінка </td>
+
+                                        <td> Дата </td>
+                                        <td> Час </td>
+                                        <td>Деталі</td>
+                                        
+                                    </tr>
+        <?php
+    }
+
+    function show_table_result($id_res, $conection){
+
+        ?>
+        <table border='2'>
+            <tr>
+                <td> ID-пит</td>
+                <td> Тип </td>
+                <td> Текст питання </td>
+                <td> Ваша <br> відповідь </td>
+                <td> Вірна <br> відповідь </td>
+               
+                <td> Балів за <br> відповідь </td>
+                <td> Набрано <br> балів </td>
+                             
+            </tr>
+
+           
+        <?php
+
+        $query = "SELECT * FROM `result_user_questions` WHERE `result_id` = $id_res";
         $result = mysqli_query($conection, $query);
-        $fields_num = mysqli_num_fields($result);
 
-       
-        if(mysqli_num_rows($result) > 0)//$f >= 1)
-        {
+        while($row = mysqli_fetch_array($result)){
 
-            
-            echo "<table border='1'>";
 
-                // printing table headers
-                echo "<tr>";
-                    for($i=0; $i<$fields_num; $i++)
-                    {
-                        $field = mysqli_fetch_field($result);
-                        echo "<td>{$field->name}</td>";
-                    }
-                echo "</tr>\n";
+            echo "<tr>";
 
-           // echo "</table>";
-       // }
+                echo "<td>".$row['question_id']."</td>";              
+                echo "<td>".$row['type_quest']."</td>";
 
-       // echo "<table border='1'>";
+                $id_quest = $row['question_id'];
+                $text = mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `questions` WHERE `id_question` = $id_quest"))['questiontext'];
+                echo "<td>".$text."</td>";
 
-            // printing table rows
+                echo "<td>".$row['answer']."</td>";
+                echo "<td>".$row['answer_correct']."</td>";
+                echo "<td>".$row['ball']."</td>";
+                echo "<td>".$row['ball_your']."</td>";
+                
+            echo " </tr>\n";
+        }
+        ?>
+         </table> 
+
+        
+        <?php
+
+
+    }
+
+    function ShowTable($user_id, $test_id, $date, $conection)
+    {    
+        $query = "SELECT * FROM `result_user_test` WHERE `user_id` = $user_id and test_id = $test_id ";
+        $query .= (isset($date) && $date != "") ? " and dateteusing = '$date'" : "";
+        $result = mysqli_query($conection, $query);
+       // echo " query = |$query|     count = |".mysqli_num_rows($result)."|  <br>";                                            
+        
+       // $fields_num = mysqli_num_fields( );
+
+       //  mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `users` WHERE id_user = "))[''];
+        
+       if(mysqli_num_rows($result) > 0)
+       {
 
             while($row = mysqli_fetch_row($result))
             {
-                echo "<tr>";
+                echo " <tr> ";
                 //------------------------
-                    foreach($row AS $cell)
-                        echo "<td>$cell</td>";
+                    
+                    foreach($row as $cell)
+                    {
+
+                        if($cell == $row[1]){
+                          
+
+                           echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `users` WHERE id_user = $cell"))['usersurname'] . "</td>";
+                           echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `users` WHERE id_user = $cell"))['username'] . "</td>";
+                           echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `users` WHERE id_user = $cell"))['userlastname'] . "</td>";
+
+                            $id_rung = mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `users` WHERE id_user = $cell"))['userrung_id'];
+                            $id_company = mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `users` WHERE id_user = $cell"))['company_id'];
+                            $id_platoon = mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `users` WHERE id_user = $cell"))['platoon_id'];
+                            $id_specialty = mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `users` WHERE id_user = $cell"))['specialty_id'];
+
+                            echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `user_rung` WHERE id_rung = $id_rung"))['rungname'] . "</td>";
+                            echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `company` WHERE id_company = $id_company"))['companynumber'] . "</td>";
+                            echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `platoon` WHERE id_platoon = $id_platoon"))['platoonnumber'] . "</td>";
+                            echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `specialty` WHERE id_specialty = $id_specialty"))['specialtyname'] . "</td>";
+                           
+                        }                        
+                        elseif($cell == $row[5] )
+                        {
+
+                            if($row[6] > 4){
+                                echo "<td bgcolor=\"green\">$cell</td>";  
+                            }elseif($row[6] > 3){
+                                echo "<td bgcolor=\"blue\">$cell</td>"; 
+                            }elseif($row[6] > 2){
+                                echo "<td bgcolor=\"yellow\">$cell</td>"; 
+                            }else{
+                                echo "<td bgcolor=\"maroon\">$cell</td>";  
+                            }
+                            
+
+                        }
+                        else
+                        {
+                            echo "<td>$cell</td>";
+                            //echo "| $cell |";
+                        }
+
+                    
+                            
+                    }
+
+                    echo "<td> <button  onclick=\"click_show_detal(".$row[0].")\" class=\"btn  btn-primary btn-block\" style=\"height : 20px; width: 48px\" ><div style=\"margin-top:-10px;\"  >+</div></button> </td>";  
+                       
                 //-------------------------
-                echo "</tr>\n";
+                echo " </tr> \n";
             }
 
-            echo "</table><br>";
-
         }
+
+            
+
+        
     }
 ?>
