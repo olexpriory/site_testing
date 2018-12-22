@@ -15,7 +15,7 @@ require ('../conection_db.php');
 
 if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POST['show_show']))
 {
-    echo "<h1> Ok!!! </h1>";
+    
 
     $ck_subdiw_com = isset($_POST['ck_subdiw_com']);
     $ck_subdiw_plat = isset($_POST['ck_subdiw_plat']);
@@ -28,7 +28,29 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
     $ck_date = isset($_POST['ck_date']);
     $ck_time = isset($_POST['ck_time']);
 
-    echo "date = |" . isset($_POST['ck_date']) . "|<br>";
+    if(isset($_POST['tests']))
+    $testname =  $_POST['tests'];
+
+    if($ck_date ){
+        $date = $_POST['date'];
+
+        if($date != "")
+        {
+            $query = "SELECT * FROM `result_user_test` WHERE dateteusing = '$date'";
+            $result = mysqli_query($conection, $query) or die(mysqli_error($conection));
+
+            $itt = 0;
+
+            while ($row = mysqli_fetch_array($result)){
+                $test_arr[$itt++] = $row['test_id'] ;           
+            }
+
+            $test_arr = array_unique($test_arr);
+        }
+        
+    }
+
+   
 
     $rezon = false;
 
@@ -75,6 +97,7 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
             }
 
 
+           
 
     $query_main = "SELECT * FROM `users` ";
     
@@ -83,29 +106,30 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
 
         $rezon = false;
 
-        if(isset($company_id)){
+        if(isset($company_id) && $company_id != ""){
             $query_main .= $rezon? " and " : "";
             $query_main .= "company_id = $company_id " ;
             $rezon = true;
         } 
-        if(isset($platoon_id)){
+        if(isset($platoon_id ) && $platoon_id != "" ){
             $query_main .= $rezon? " and " : "";
             $query_main .= "platoon_id = $platoon_id ";
             $rezon = true;
         } 
-        if(isset($specialty_id)){
+        if(isset($specialty_id ) && $specialty_id != "" ){
             $query_main .= $rezon? " and " : "";
             $query_main .= "specialty_id = '$specialty_id' ";
             $rezon = true;
         }
+
+        
+
         if(isset($usersurname)){
             $buf = $query_main;
             $buf .=  $rezon? " and " : "";
             $buf .= "usersurname = '$usersurname' ";
 
-            $res = mysqli_query($conection, $buf);
-            echo "buf1 = $buf <br>  ";
-            echo "mysqli_num_rows1 = " . mysqli_num_rows( $res ) . " <br>  "; 
+            $res = mysqli_query($conection, $buf);          
             if(mysqli_num_rows( $res ) > 0){
                 $query_main .= $rezon? " and " : "";
                 $query_main .= "usersurname = '$usersurname' ";
@@ -114,15 +138,16 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
                 $usersurname = null;
             }
         }
+
+
+
         if(isset($username)){
 
             $buf = $query_main;
             $buf .=  $rezon? " and " : "";
             $buf .= "username = '$username' ";
 
-            $res = mysqli_query($conection, $buf);
-            echo "buf2 = $buf <br>  ";
-            echo "mysqli_num_rows2 = " . mysqli_num_rows( $res ) . " <br>  "; 
+            $res = mysqli_query($conection, $buf);           
             if(mysqli_num_rows($res) > 0){
                 $query_main .= $rezon? " and " : "";
                 $query_main .= "username = '$username' ";
@@ -136,9 +161,7 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
             $buf .=  $rezon? " and " : "";
             $buf .= "userlastname = '$userlastname' ";
 
-            $res = mysqli_query($conection, $buf);
-            echo "buf3 = $buf <br>  ";
-            echo "mysqli_num_rows3 = " . mysqli_num_rows( $res ) . " <br>  "; 
+            $res = mysqli_query($conection, $buf);           
             if(mysqli_num_rows($res) > 0){
                 $query_main .= $rezon? " and " : "";
                 $query_main .= "userlastname = '$userlastname' ";
@@ -152,27 +175,32 @@ if (isset($_POST['result_schow']) || isset($_POST['show_reload']) || isset($_POS
 
     } 
 
-     
+   
+
     if($query_main == "SELECT * FROM `users`  WHERE ")
         $query_main = "SELECT * FROM `users`";
+
+       
 
     $result = mysqli_query($conection, $query_main) or die(mysqli_error($conection));
     $count = mysqli_num_rows($result);
     echo "count = $count";
 
 
-    //$itr = 0;
+    
+
+    
+
+
+    $itr = 0;
+    while ($row = mysqli_fetch_array($result)){
+       // echo $row['id_user'] . "<br>";
+        $id_users_arr[$itr++] = $row['id_user'];
+    }
 
    
 
-   // while ($row = mysqli_fetch_array($result)){
-   //     echo $row['id_user'] . "<br>";
-   //     $id_users_arr[$itr++] = $row['id_user'];
-  //  }
-
-  // foreach($id_users_arr as $id_us){
-  //      echo "<h5>$id_us</h5>";
-  // }
+ 
     
 
 }
@@ -194,9 +222,7 @@ else
    
 
         <form action="result_schow.php" method="POST" style="width:100%;  ">
-            <div class="container" style= "background-color: #C0C0C0; width:100%; height:360px">
-
-
+            <div class="container" style= "background-color: #C0C0C0; width:100%; height:285px">
 
                 <div class="row" style="width:100%; height:20px ">
                 </div>  
@@ -208,7 +234,6 @@ else
                     </div>
 
 
-
                     <div class="col-1">                               
                         <div class="form-check" style=" margin-top : 10px; margin-left : 60px;">                                
                             <input   onclick="click_check('subdiw_com') "class="form-check-input" type="checkbox"  name ="ck_subdiw_com" id="check_subdiw_com" value="1" <?php if($ck_subdiw_com) echo"checked"; ?>>                                                            
@@ -218,20 +243,23 @@ else
                     <div class="col-2">
                         <div class="form-group" style="margin-top: 4px;"> 
 
-                            <select id = "subdiw_com" name='subdiw_com' class="form-control"  style="display:none"   >
+                            <select onchange="click_reload()" id = "subdiw_com" name='subdiw_com' class="form-control"  style="display:none"   >
                                 <!--<option value=""> Рота </option> -->
+                                <option value="">-- Рота № --</option>
                                 <?php
-
-                                        if(isset($company_id)){
-                                            $result = mysqli_query($conection, "SELECT * FROM `company` WHERE id_company = '$company_id'");
-                                            echo "<option value = \"$company_id\" >". mysqli_fetch_array($result)['companynumber'] . "</option> "; 
-                                        }
-                                        else echo "<option  value=\"\">-- Рота № --</option>";
-
+                         
                                         $result = mysqli_query($conection, "SELECT * FROM `company`");
 
-                                        while ($row = mysqli_fetch_array($result)){
-                                            echo "<option value='".$row['id_company']."'>".$row['companynumber']."</option>";
+                                        while ($row = mysqli_fetch_array($result))
+                                        {
+                                            $str =  "<option value='".$row['id_company']."'";                                           
+                                            if(isset($company_id)){
+                                                if($company_id == $row['id_company']){
+                                                    $str .= " selected";
+                                                }
+                                            }
+                                            $str .= ">".$row['companynumber']."</option>";
+                                            echo $str;
                                         }
                                 ?>
                             </select> 
@@ -241,8 +269,6 @@ else
                         </div>
                     </div>
 
-
-
                     <div class="col-1">                               
                         <div class="form-check" style=" margin-top : 10px; margin-left : 60px;">                                
                             <input  onclick="click_check('subdiw_plat')"  class="form-check-input" id="check_subdiw_plat" type="checkbox"  name="ck_subdiw_plat" value="1" <?php if($ck_subdiw_plat) echo"checked"; ?>>                                                              
@@ -251,20 +277,22 @@ else
 
                     <div class="col-2">
                         <div class="form-group" style="margin-top: 4px;">     
-                            <select name='subdiw_plat' class="form-control" id="subdiw_plat" style="display:none" >
+                            <select onchange="click_reload()" name='subdiw_plat' class="form-control" id="subdiw_plat" style="display:none" >
                                 <!--<option value=""> Взвод </option>-->
+                                <option  value="">-- Взвод № --</option>
                                 <?php
-                                                    
-                                    if(isset($platoon_id)){
-                                        $result = mysqli_query($conection, "SELECT * FROM `platoon` WHERE id_platoon = '$platoon_id'");
-                                        echo "<option value = \"$platoon_id\" >". mysqli_fetch_array($result)['platoonnumber'] . "</option> "; 
-                                    }
-                                    else echo "<option  value=\"\">-- Взвод № --</option>";
 
                                     $result = mysqli_query($conection, "SELECT * FROM `platoon`");
 
-                                    while ($row = mysqli_fetch_array($result)){
-                                        echo "<option value='".$row['id_platoon']."'>".$row['platoonnumber']."</option>";
+                                    while ($row = mysqli_fetch_array($result))
+                                    {
+                                        $str = "<option value='".$row['id_platoon']."'";
+                                        if(isset($platoon_id)){
+                                            if($platoon_id == $row['id_platoon'])
+                                            $str .= " selected";
+                                        }
+                                        $str .= ">".$row['platoonnumber']."</option>";
+                                        echo $str;
                                     }                                                                   
                                 ?>
                             </select> 
@@ -280,23 +308,24 @@ else
                         </div>                                                                         
                     </div>
 
-
                     <div class="col-2">
                         <div class="form-group" style="margin-top: 4px;">     
-                            <select name='subdiw_spec' class="form-control" id="subdiw_spec" style="display:none" >
+                            <select onchange="click_reload()" name='subdiw_spec' class="form-control" id="subdiw_spec" style="display:none" >
                                 <!--<option value=""> Спеціальність </option>-->
+                                <option  value="">-- Спеціальність --</option>
                                 <?php
-                                    
-                                    if(isset($specialty_id)){
-                                        $result = mysqli_query($conection, "SELECT * FROM `specialty` WHERE id_specialty = '$specialty_id'");
-                                        echo "<option value = \"$specialty_id\" >". mysqli_fetch_array($result)['specialtyname'] . "</option> "; 
-                                    }
-                                    else echo "<option  value=\"\">-- Спеціальність --</option>";
 
                                     $result = mysqli_query($conection, "SELECT * FROM `specialty`");
 
-                                    while ($row = mysqli_fetch_array($result)){
-                                        echo "<option value='".$row['id_specialty']."'>".$row['specialtyname']."</option>";
+                                    while ($row = mysqli_fetch_array($result))
+                                    {
+                                        $str =  "<option value='".$row['id_specialty'] . "'";
+                                        if(isset($specialty_id)){
+                                            if($specialty_id == $row['id_specialty'])
+                                            $str .= " selected";
+                                        }
+                                        $str .= ">".$row['specialtyname']."</option>";
+                                        echo $str;
                                     } 
 
                                 ?>
@@ -323,7 +352,7 @@ else
 
                     <div class="col-2">
                         <div class="form-group" style="margin-top: 4px;">     
-                            <select id="user_surname" name='user_surname' class="form-control" id="exampleFormControlSelect1" style="display:none"  >
+                            <select onchange="click_reload()" id="user_surname" name='user_surname' class="form-control" id="exampleFormControlSelect1" style="display:none"  >
                                 <!--<option value=""> Прізвище </option>-->
                                 <?php
                                         if(isset($usersurname)){                                           
@@ -356,7 +385,7 @@ else
 
                     <div class="col-2">
                         <div class="form-group" style="margin-top: 4px;">     
-                            <select id="user_name" name='user_name' class="form-control" id="exampleFormControlSelect1" style="display:none"   >
+                            <select onchange="click_reload()" id="user_name" name='user_name' class="form-control" id="exampleFormControlSelect1" style="display:none"   >
                                 <!--<option value=""> Ім'я </option>-->
                                 <?php
                                     if(isset($username)){                                           
@@ -389,7 +418,7 @@ else
 
                     <div class="col-2">
                         <div class="form-group" style="margin-top: 4px;">     
-                            <select id="user_lastname" name='user_lastname' class="form-control" id="exampleFormControlSelect1" style="display:none" >
+                            <select onchange="click_reload()" id="user_lastname" name='user_lastname' class="form-control" id="exampleFormControlSelect1" style="display:none" >
                                 <!--<option value=""> По батькові </option>-->
                                 <?php
                                         if(isset($userlastname)){                                           
@@ -416,11 +445,11 @@ else
                     
                 </div>
 
-                <div class="row" style="width:100%; height:70px">
+                <div class="row" style="width:100%; height:60px">
 
 
                     <div class="col-2">
-                        <label for="exampleFormControlSelect1">Дата / час</label>
+                        <label for="exampleFormControlSelect1">Дата проведення</label>
                     </div>
 
 
@@ -432,19 +461,37 @@ else
 
                     <div class="col-2">
                         <div class="form-group" style="margin-top: 4px;">     
-                            <select id="date" name='cont_quest' class="form-control" id="exampleFormControlSelect1" style="display:none" >
+                            <select onchange="click_reload()" id="date" name='date' class="form-control" id="exampleFormControlSelect1" style="display:none" >
                                 <!--<option value=""> Дата </option>-->
+                                <option value=""> Дата </option>
                                 <?php
                                                          
-                                                         if(isset($date)){                    
-                                                            echo "<option value = \"$date\" >". $date . "</option> "; 
-                                                        }
-                                                        else echo "<option  value=\"\">-- Дата --</option>";     
+                                                            
                     
-                                                        $result = mysqli_query($conection, "SELECT * FROM `result_user_test` GROUP BY dateteusing");
+                                                        $query = "SELECT * FROM `result_user_test` ";
+
+                                                        if(isset($testname) && $testname != ""){
+                                                            $id_test = mysqli_fetch_array( mysqli_query($conection, "SELECT * FROM `tests` WHERE  testname = '$testname'"))['id_test'];
+                                                            $query .= " WHERE test_id = '$id_test' ";
+                                                        }
+
+                                                        $query .= " GROUP BY dateteusing";
+
+                                                        $result = mysqli_query($conection, $query);
                     
                                                         while ($row = mysqli_fetch_array($result)){
-                                                            echo "<option value=' ".$row['idateteusing']." '>".$row['dateteusing']."</option>";
+
+                                                           $str = "<option value='".$row['dateteusing'] . "' ";
+
+                                                           if(isset($date)){
+                                                                if($date == $row['dateteusing'])
+                                                                    $str .= " selected"; 
+                                                           }
+                                                           
+                                                           $str .= ">" . $row['dateteusing']."</option>";
+
+                                                           echo  $str;
+
                                                         }                                    
                                 ?>
                             </select> 
@@ -454,98 +501,73 @@ else
                         </div>
                     </div>
 
-
-
-                    <div class="col-1">                               
-                        <div class="form-check" style=" margin-top : 10px; margin-left : 60px;">                                
-                            <input id="check_time" onclick="click_check('time')" class="form-check-input" type="checkbox"  name="ck_time" value="1" <?php if($ck_time) echo"checked"; ?>> 
-                        </div>                                                                         
+                    <div class="col-1">
+                        <label style="margin-top: 10px; margin-left: 20px; "for="exampleFormControlSelect1">Тести</label>
                     </div>
 
-                    <div class="col-2">
-                        <div class="form-group" style="margin-top: 4px;">     
-                            <select id="time" name='cont_quest' class="form-control" id="exampleFormControlSelect1" style="display:none" >
-                                <option value=""> Час від </option>
+
+
+                    <div class="col-5" style="margin-top: 4px;"> 
+                        <select onchange="click_reload()" id = "tests" name='tests' class="form-control"     >
+                                <!--<option value=""> Всі тести </option> -->
+                                <option value=""> Всі тести </option>
                                 <?php
-                                                                      
+
+                                        if(!isset($test_arr)){
+                                            $result = mysqli_query($conection, "SELECT * FROM `tests`");
+
+                                            while ($row = mysqli_fetch_array($result))
+                                            {
+                                                $str = "<option value='" . $row['testname'] . "' ";
+
+                                                if(isset($testname)){
+                                                    if($testname == $row['testname']){
+                                                        $str .= " selected";                                                      
+                                                    }
+                                                }
+
+                                                $str .= ">" . $row['testname'] . "</option>";
+                                                echo $str;
+                                            }
+                                        }
+                                        else{
+
+                                            foreach($test_arr as $id_test){
+                                                $buf_name_test = mysqli_fetch_array( mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = $id_test"))['testname'];
+                                                $str = "<option value='$buf_name_test' ";
+                                                if(isset($testname)){
+                                                    if($testname == $buf_name_test){
+                                                        $str .= " selected";
+                                                       
+                                                    }
+                                                }
+                                                $str .= ">$buf_name_test</option>";
+                                                echo $str;
+                                            }
+                                        }
                                 ?>
-                            </select>
-
-                            <input id="time_mask" class="form-control form-control-sm" type="text" style = "height:38px;"  value = "  Час від" readonly>
-
-                        </div>
+                        </select>  
+                      
                     </div>
-           
-                    <div class="col-1">                               
-                        <div class="form-check" style=" margin-top : 4px; ">                                
-                           
-                        </div>                                                                         
-                    </div>
-
-                    <div class="col-2">
-                        <div class="form-group" style="margin-top: 4px;">     
-                            <select id="time_2" name='cont_quest' class="form-control" id="exampleFormControlSelect1" style="display:none" >
-                                <option value=""> Час до </option>
-                                <?php
-                                    
-                                    
-                                    
-                                ?>
-                            </select>
-
-                            <input id="time_mask_2" class="form-control form-control-sm" type="text" style = "height:38px;"  value = "  Час до" readonly>
-
-                        </div>
-                    </div>  
-
 
 
                 </div>
-
-
-                                                        
-                <div class="row" style="width:100%; height:80px">
-
-                    <div class="col-3">
-                        <label for="exampleFormControlSelect1">Тести</label>
-                    </div>
-                                
-                    <div class="col-8" style="margin-top: 4px;"> 
-                        <select id = "tests" name='tests' class="form-control"     >
-                                <!--<option value=""> Всі тести </option> -->
-                                <?php
-
-                                        if(isset($testname)){
-                                            $result = mysqli_query($conection, "SELECT * FROM `tests` WHERE testname = '$testname'");
-                                            echo "<option value = \"$testname\" >$testname</option> "; 
-                                        }
-                                        else echo "<option  value=\"\">-- Всі тести --</option>";
-
-                                        $result = mysqli_query($conection, "SELECT * FROM `tests`");
-
-                                        while ($row = mysqli_fetch_array($result)){
-                                            echo "<option value='".$row['testname']."'>".$row['testname']."</option>";
-                                        }
-                                ?>
-                        </select>                                                    
-                                                         
-                    </div>
-            
-                 </div>
-
+           
+                <hr noshade   style = "height: 1px" > 
 
                 <div class="row" style="width:100%;">
                                 
-                    <div class="col-12" style="margin-top: 4px;">                                                     
-                        <button  class="btn btn-lg btn-primary btn-block" name ="show_reload" value="1" type="submit">reload</button> 
+                    <div class="col-12" style="margin-top: -15px;"> 
 
-                        <button  class="btn btn-lg btn-primary btn-block" name ="show_show" value="1" type="submit">Відобразити результат</button>                     
+                        <button  id="btn_reload" class="btn btn-lg btn-primary btn-block" name ="show_reload"  style="display:none" value="1" type="submit">reload</button> 
+                        <button  class="btn btn-lg btn-primary btn-block" name ="show_show" value="1" type="submit">Відобразити результат</button>
+
                     </div>
 
                 </div>
-                         
-                                   
-                
+
+                <hr noshade   style = "height: 1px; margin-top: 8px;" > 
+                                                                         
             </div>
         </form>
 
@@ -555,14 +577,128 @@ else
             
             <hr noshade   style = "height: 1px" >
 
-            <div class="row">              
-
+            <div class="row"> 
                 <div class="col-1">                                                                                                                   <!--== [Виберіть один / декілька із варіантів]/[ Впишіть відповідь в поле]/[ Встановіть відповідність] ===-->
                     <label for="exampleFormControlSelect1" ><h5 style = "display : inline">  SHOW </label>
-                </div>
-                                  
+                </div>                            
             </div>
+
+                <?php
+
+                if(isset($_POST['show_show']))
+                {
+
+                
+                    
+                    $fat_err = false;
+                    $err =false;
+
+                    
+                   // $testname
+                   // $test_arr
+
+                    if(!isset($id_users_arr) || !isset($testname) )
+                        $fat_err = true;
+                   // else
+                    if(count($id_users_arr) <= 0)  
+                        $err = true;
+                   // else
+                    if($testname == "" && isset($test_arr) && count($test_arr) <= 0)
+                        $err = true;
+
+                    if($fat_err){
+                        ?>
+                        <div class="row"> 
+                            <div class="col-12">                                                                                                                   
+                                <h1 align="center"> Невірний запит!!! </h1>
+                            </div>                            
+                        </div>
+                        <?php
+
+                    }elseif($err){
+                        ?>
+                        <div class="row"> 
+                            <div class="col-12">                                                                                                                   
+                                <h1 align="center"> Співпадінь не знайдено! </h1>
+                            </div>                            
+                        </div>
+                        <?php
+
+                    }else{
+                        ?>
+                        <div class="row"> 
+                            <div class="col-12">                                                                                                                   
+                            <?php
+                                    $it = 1;
+
+                                    if($testname == "")
+                                    {
+                                        if(isset($test_arr))
+                                        {
+                                            foreach($test_arr as $test_id)
+                                            {
+                                               // echo "am work  = |$test_id|<br>";
+
+                                                foreach($id_users_arr as $user_id)
+                                                {
+                                                    
+                                                    $query = "SELECT * FROM `result_user_test` WHERE `user_id` = $user_id and test_id = $test_id ";
+                                                    if(isset($date) && $date != "")$query .= " and dateteusing = '$date'";
+                                                    ShowTable($query, $conection , $it++);
+                                                }                                                    
+                                            }
+                                        }
+                                        else
+                                        {
+                                            foreach($id_users_arr as $user_id)
+                                            {       
+                                                $query = "SELECT * FROM `result_user_test` WHERE `user_id` = $user_id ";
+                                                if(isset($date) && $date != "")$query .= " and dateteusing = '$date'";
+                                                ShowTable($query, $conection, $it++ );
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach($id_users_arr as $user_id)
+                                        {
+                                            $test_id = mysqli_fetch_array( mysqli_query($conection, "SELECT * FROM `tests` WHERE  testname = '$testname'"))['id_test'];
+                                            $query = "SELECT * FROM `result_user_test` WHERE `user_id` = $user_id and test_id = $test_id";
+                                            if(isset($date) && $date != "")$query .= " and dateteusing = '$date'";
+                                            ShowTable($query, $conection, $it++ );
+                                        }
+                                    }
+
+
+                                   
+                                       
+
+
+                                    
+                            ?>
+                            </div>
+
+                        </div>                       
+                        <?php
+                    }
+
+
+
+
+
+
+
+                }
+
+
+                ?>
+
+
         </div>
+
+        <br>
+        <br>
+        <br>
 
 
         <script>
@@ -570,19 +706,24 @@ else
 
             window.onload = function() {
 
-                click_check('subdiw_com');
-                click_check('subdiw_plat');
-                click_check('subdiw_spec');
+                click_check_without_reload('subdiw_com');
+                click_check_without_reload('subdiw_plat');
+                click_check_without_reload('subdiw_spec');
 
-                click_check('user_surname');
-                click_check('user_name');
-                click_check('user_lastname');
+                click_check_without_reload('user_surname');
+                click_check_without_reload('user_name');
+                click_check_without_reload('user_lastname');
 
-                click_check('date');
-                click_check('time');            
+                click_check_without_reload('date');
+                click_check_without_reload('time');            
 
             };
 
+            function click_reload(){
+                document.getElementById("btn_reload").click();
+            }
+
+           
                     function click_check(id)
                     {
                        
@@ -591,22 +732,33 @@ else
                         if(check.checked){
 
                             document.getElementById(`${id}`).style.display = "";
-                            document.getElementById(`${id}_mask`).style.display = "none";
-
-                            if(id == "time"){
-                                document.getElementById(`${id}_2`).style.display = "";
-                                document.getElementById(`${id}_mask_2`).style.display = "none";
-                            }
+                            document.getElementById(`${id}_mask`).style.display = "none";                         
 
                         }else{
                             document.getElementById(`${id}`).style.display = "none";
-                            document.getElementById(`${id}_mask`).style.display = "";
-
-                            if(id == "time"){
-                                document.getElementById(`${id}_2`).style.display = "none";
-                                document.getElementById(`${id}_mask_2`).style.display = "";
-                            }
+                            document.getElementById(`${id}_mask`).style.display = "";                    
                         }
+
+                        //click_reload();
+                            
+                    }
+
+                    function click_check_without_reload(id)
+                    {
+                       
+                        check = document.getElementById(`check_${id}`);
+                                             
+                        if(check.checked){
+
+                            document.getElementById(`${id}`).style.display = "";
+                            document.getElementById(`${id}_mask`).style.display = "none";                         
+
+                        }else{
+                            document.getElementById(`${id}`).style.display = "none";
+                            document.getElementById(`${id}_mask`).style.display = "";                    
+                        }
+
+                        
                             
                     }
 
@@ -619,3 +771,50 @@ else
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+<?php
+    function ShowTable($query, $conection , $f )
+    {      
+        $result = mysqli_query($conection, $query);
+        $fields_num = mysqli_num_fields($result);
+
+       
+        if(mysqli_num_rows($result) > 0)//$f >= 1)
+        {
+
+            
+            echo "<table border='1'>";
+
+                // printing table headers
+                echo "<tr>";
+                    for($i=0; $i<$fields_num; $i++)
+                    {
+                        $field = mysqli_fetch_field($result);
+                        echo "<td>{$field->name}</td>";
+                    }
+                echo "</tr>\n";
+
+           // echo "</table>";
+       // }
+
+       // echo "<table border='1'>";
+
+            // printing table rows
+
+            while($row = mysqli_fetch_row($result))
+            {
+                echo "<tr>";
+                //------------------------
+                    foreach($row AS $cell)
+                        echo "<td>$cell</td>";
+                //-------------------------
+                echo "</tr>\n";
+            }
+
+            echo "</table><br>";
+
+        }
+    }
+?>
