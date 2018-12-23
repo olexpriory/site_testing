@@ -85,7 +85,7 @@
 
                 if($questiontype == "only")
                 {
-                    $answer = $_POST["exampleRadio_$value_arr"];
+                    $answer = (isset($_POST["exampleRadio_$value_arr"])) ? $_POST["exampleRadio_$value_arr"] : "";
                     $answer_corr = explode("\n#\n",$questionanswer)[1];
                     if($answer == $answer_corr){
                         $ball_your = $questionball;

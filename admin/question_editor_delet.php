@@ -2,8 +2,7 @@
 
 require ('../conection_db.php');
 
-if (
-        isset($_POST['id_test'])
+if (    isset($_POST['id_test'])
         && isset($_POST['id_question'])
         && isset($_POST['counter'])
         && isset($_POST['option'])
@@ -30,7 +29,7 @@ if (
 
     }elseif($_POST['option'] == "ed"){
 
-        $_SESSION['msg'] = "EDITTT питання!";
+        $_SESSION['msg'] = "Зміна питання";
 
     }
 
