@@ -914,10 +914,10 @@ else
                            $id_platoon = mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `users` WHERE id_user = $cell"))['platoon_id'];
                            $id_specialty = mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `users` WHERE id_user = $cell"))['specialty_id'];
 
-                           echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `user_rung` WHERE id_rung = $id_rung"))['rungname'] . "</td>";
-                           echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `company` WHERE id_company = $id_company"))['companynumber'] . "</td>";
-                           echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `platoon` WHERE id_platoon = $id_platoon"))['platoonnumber'] . "</td>";
-                           echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `specialty` WHERE id_specialty = $id_specialty"))['specialtyname'] . "</td>";                         
+                           if($id_rung != "") echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `user_rung` WHERE id_rung = $id_rung"))['rungname'] . "</td>"; else echo "<td></td>";
+                           if($id_company != "") echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `company` WHERE id_company = $id_company"))['companynumber'] . "</td>"; else echo "<td></td>";
+                           if($id_platoon != "") echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `platoon` WHERE id_platoon = $id_platoon"))['platoonnumber'] . "</td>"; else echo "<td></td>";
+                           if($id_specialty != "") echo "<td>" . mysqli_fetch_array(mysqli_query($conection,  "SELECT * FROM `specialty` WHERE id_specialty = $id_specialty"))['specialtyname'] . "</td>"; else echo "<td></td>";                         
                         }
                         elseif($itr == 2 )
                         {

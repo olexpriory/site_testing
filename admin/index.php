@@ -43,7 +43,7 @@
 
 
 <div class="container" style= " margin-top:10px;">
-    <form action="group_control.php" method="POST">
+    <form action="show_group.php" method="POST">
         <button class="btn btn-lg btn-primary btn-block" name="group" type="submit">Підрозділи</button>
     </form>
 </div>

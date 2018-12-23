@@ -270,7 +270,7 @@
         <div class="row"  >
             <div class="col-12" style="margin-top : 10px; height: 55px">      
                     <h3 align="center" >
-                        Тест "<?php echo mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$id_user' "))['testname']; ?>"
+                        Тест "<?php echo mysqli_fetch_array(mysqli_query($conection, "SELECT * FROM `tests` WHERE id_test = '$id_test' "))['testname']; ?>"
                     </h3>             
             </div>
         </div>

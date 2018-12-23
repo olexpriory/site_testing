@@ -277,7 +277,7 @@
 
                                                             <div class="col-1" >
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="exampleRadio_<?php echo "$id_question"; ?>"  value="<?php echo "$iter"; ?>" > <!-- <?php if($iter == 1)echo "checked"; ?> -->
+                                                                    <input class="form-check-input" type="radio" name="exampleRadio_<?php echo "$id_question"; ?>"  value="<?php echo "$iter"; ?>" > <!-- <?php //if($iter == 1)echo "checked"; ?> -->
                                                                     <label class="form-check-label" for="exampleRadios">
                                                                         №<?php echo "$iter";  ?>
                                                                     </label>
