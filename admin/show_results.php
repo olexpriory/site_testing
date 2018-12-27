@@ -569,7 +569,7 @@ else
 
                 <?php
 
-                    if(isset($_POST['show_show']))
+                    if(isset($_POST['show_show'])|| isset($_POST['show_reload']))
                     {
 
                         $fat_err = false;
